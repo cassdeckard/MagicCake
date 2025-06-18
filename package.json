@@ -4,7 +4,6 @@
   "description": "An Earthbound battle background visualization demo",
   "author": "Cass Deckard <cassdeckard@gmail.com>",
   "license": "MIT",
-  "type": "module",
   "main": "src/index.js",
   "scripts": {
     "start": "react-scripts start",
@@ -17,7 +16,7 @@
     "engine",
     "animation"
   ],
-  "homepage": "https://github.com/cassdeckard/magic-cake#readme",
+  "homepage": "https://cassdeckard.github.io/magic-cake",
   "bugs": {
     "url": "https://github.com/cassdeckard/magic-cake/issues"
   },
@@ -29,5 +28,17 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-scripts": "^5.0.1"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
