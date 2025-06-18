@@ -2,7 +2,7 @@ import { setupEngine } from "@cassdeckard/ebbg";
 import { useEffect, useState, useRef } from "react";
 
 function Canvas() {
-  const [bgEngineState, setBgEngineState] = useState({});
+  const [bgEngineState] = useState({});
   const canvasRef = useRef(null);
 
   useEffect(() => {
