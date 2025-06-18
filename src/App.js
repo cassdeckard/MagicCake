@@ -2,9 +2,7 @@ import { setupEngine } from "@cassdeckard/ebbg";
 import { useEffect, useState, useRef } from "react";
 
 function Canvas() {
-  const [bgEngineState, setBgEngineState] = useState({
-    fullscreen: "true",
-  });
+  const [bgEngineState, setBgEngineState] = useState({});
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -15,8 +13,8 @@ function Canvas() {
 
   return (
     <>
-          <canvas-overlay></canvas-overlay>
-          <canvas ref={canvasRef} id="canvas"></canvas>
+          <div id="overlay">test overlay</div>
+          <canvas ref={canvasRef} id="canvas" className="full"></canvas>
     </>
   );
 }
