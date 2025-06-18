@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from "react";
 
 const DEFAULT_LAYER_1 = 86;
 const DEFAULT_LAYER_2 = 0;
-const DEFAULT_INTERVAL_SEC = 5;
+const DEFAULT_INTERVAL_SEC = 60;
 
 function Canvas() {
   const [layer1, setLayer1] = useState(DEFAULT_LAYER_1);
