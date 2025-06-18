@@ -25,9 +25,12 @@
     "url": "git+https://github.com/cassdeckard/magic-cake.git"
   },
   "dependencies": {
+    "@cassdeckard/ebbg": "^0.0.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-scripts": "^5.0.1"
+  },
+  "devDependencies": {
   },
   "browserslist": {
     "production": [
