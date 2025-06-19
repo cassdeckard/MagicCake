@@ -117,15 +117,15 @@ export default function Canvas() {
 
   return (
     <>
-          <div id="overlay">
-            <div id="overlay-content">
-              <h1>
+      <div id="overlay">
+        <div id="overlay-content">
+          <h1>
                 [{layer1.value}, {layer2.value}]
-                ({timer} % {refreshSeconds})</h1>
-            </div>
-          </div>
-          
-          <canvas ref={canvasRef} id="canvas" className="full"></canvas>
+                ({timer} % {refreshSeconds})
+          </h1>
+        </div>
+      </div>
+      <canvas ref={canvasRef} id="canvas" className="full"></canvas>
     </>
   );
 }
