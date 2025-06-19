@@ -1,21 +1,22 @@
 import { setupEngine } from "@cassdeckard/ebbg";
 import { useEffect, useState, useRef } from "react";
 import { useLayer } from "../hooks/useLayer";
+import { useTimer } from "../hooks/useTimer";
 
 const DEFAULT_LAYER_1 = 86;
 const DEFAULT_LAYER_2 = 0;
 const DEFAULT_INTERVAL_SEC = 60;
 
 export default function Canvas() {
-  const [appSeconds, setAppSeconds] = useState(0);
   const [refreshSeconds, setRefreshSeconds] = useState(DEFAULT_INTERVAL_SEC);
   const [bgEngineState, setBgEngineState] = useState({});
   const [engine, setEngine] = useState(null);
   const canvasRef = useRef(null);
 
   // Use custom hooks for layer logic
-  const layer1 = useLayer("layer1", DEFAULT_LAYER_1, appSeconds, refreshSeconds);
-  const layer2 = useLayer("layer2", DEFAULT_LAYER_2, appSeconds, refreshSeconds);
+  const timer = useTimer(0);
+  const layer1 = useLayer("layer1", DEFAULT_LAYER_1, timer, refreshSeconds);
+  const layer2 = useLayer("layer2", DEFAULT_LAYER_2, timer, refreshSeconds);
 
   // Handles keydown events
   const handleKeyDown = (key) => {
@@ -82,12 +83,6 @@ export default function Canvas() {
     }
   }, [engine]);
 
-  // One second ticker
-  useEffect(() => {
-    const timer = setInterval(() => setAppSeconds(appSeconds + 1), 1000);
-    return () => clearInterval(timer);
-  }, [appSeconds]);
-
   // Subscribe handleKeyDown to keydown events
   useEffect(() => {
     const keyDownListener = (event) => {
@@ -104,7 +99,7 @@ export default function Canvas() {
             <div id="overlay-content">
               <h1>
                 [{layer1.value}, {layer2.value}]
-                ({appSeconds} % {refreshSeconds})</h1>
+                ({timer} % {refreshSeconds})</h1>
             </div>
           </div>
           
