@@ -3,6 +3,7 @@ import { useEffect, useState, useRef, useCallback, useMemo } from "react";
 
 import { useLayer } from "../hooks/useLayer";
 import { useTimer } from "../hooks/useTimer";
+import { useEnemyData } from "../hooks/useEnemyData";
 
 const DEFAULT_LAYER_1 = 86;
 const DEFAULT_LAYER_2 = 0;
@@ -19,12 +20,13 @@ export default function Canvas() {
   const timer = useTimer(0);
   const layer1 = useLayer("layer1", DEFAULT_LAYER_1);
   const layer2 = useLayer("layer2", DEFAULT_LAYER_2);
+  const enemyData = useEnemyData();
 
   const countdown = useCallback(() =>
     refreshSeconds - (timer % refreshSeconds),
   [refreshSeconds, timer])
 
-  // Use refs to access current layer1 functions
+  // Memoize layer mutators to prevent unnecessary re-renders
   const layerMutate = useMemo(() => [{
     randomize: layer1.randomize,
     shift: layer1.shift,
@@ -34,6 +36,11 @@ export default function Canvas() {
     shift: layer2.shift,
     zero: layer2.zero
   }], [layer1.randomize, layer1.shift, layer1.zero, layer2.randomize, layer2.shift, layer2.zero]);
+
+  const enemyFuncs = useMemo(() => ({
+    randomEnemyGroup: enemyData.randomEnemyGroup,
+    enemiesInGroup: enemyData.enemiesInGroup,
+  }), [enemyData.randomEnemyGroup, enemyData.enemiesInGroup]);
 
   const toggleRefresh = useCallback(() => {
     console.log("toggleRefresh");
@@ -125,6 +132,15 @@ export default function Canvas() {
       layerMutate[0].randomize(timer);
     }
   }, [layerMutate, timer, refreshSeconds, countdown]);
+
+  useEffect(() => {
+    if (enemyFuncs.randomEnemyGroup) {
+      console.log(`randomEnemyGroup: ${enemyFuncs.randomEnemyGroup()}`);
+    }
+    if (enemyFuncs.error) {
+      console.error("Enemy data error:", enemyFuncs.error);
+    }
+  }, [enemyFuncs]);
 
   return (
     <>
