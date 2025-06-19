@@ -19,6 +19,10 @@ export default function Canvas() {
   const layer1 = useLayer("layer1", DEFAULT_LAYER_1);
   const layer2 = useLayer("layer2", DEFAULT_LAYER_2);
 
+  const countdown = useCallback(() =>
+    refreshSeconds - (timer % refreshSeconds),
+  [refreshSeconds, timer])
+
   // Use refs to access current layer1 functions
   const layerMutate = useMemo(() => [{
     randomize: layer1.randomize,
@@ -110,7 +114,7 @@ export default function Canvas() {
 
   // Randomly updates layer 1 on refresh interval
   useEffect(() => {
-    if (timer % refreshSeconds === 0) {
+    if (countdown() === refreshSeconds) {
       layerMutate[0].randomize(timer);
     }
   }, [layerMutate, timer, refreshSeconds]);
@@ -121,7 +125,7 @@ export default function Canvas() {
         <div id="overlay-content">
           <h1>
                 [{layer1.value}, {layer2.value}]
-                ({timer} % {refreshSeconds})
+                ({countdown()} | {refreshSeconds})
           </h1>
         </div>
       </div>
