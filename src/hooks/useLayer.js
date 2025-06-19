@@ -1,8 +1,8 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
 const MAX_LAYER_VALUE = 327;
 
-export function useLayer(id, initialValue, appSeconds, refreshSeconds) {
+export function useLayer(id, initialValue) {
   const [value, setValue] = useState(initialValue);
 
   // Shifts layer by direction vector
@@ -21,13 +21,6 @@ export function useLayer(id, initialValue, appSeconds, refreshSeconds) {
     console.log(`zero`);
     setValue(0);
   }, []);
-
-  // Randomly updates layer on refresh interval
-  useEffect(() => {
-    if (appSeconds % refreshSeconds === 0 && id === "layer1") {
-      randomize(appSeconds);
-    }
-  }, [appSeconds, refreshSeconds, id, randomize]);
 
   return {
     value,

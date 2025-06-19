@@ -1,5 +1,5 @@
 import { setupEngine } from "@cassdeckard/ebbg";
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef, useCallback, useMemo } from "react";
 
 import { useLayer } from "../hooks/useLayer";
 import { useTimer } from "../hooks/useTimer";
@@ -16,8 +16,19 @@ export default function Canvas() {
 
   // Use custom hooks for layer logic
   const timer = useTimer(0);
-  const layer1 = useLayer("layer1", DEFAULT_LAYER_1, timer, refreshSeconds);
-  const layer2 = useLayer("layer2", DEFAULT_LAYER_2, timer, refreshSeconds);
+  const layer1 = useLayer("layer1", DEFAULT_LAYER_1);
+  const layer2 = useLayer("layer2", DEFAULT_LAYER_2);
+
+  // Use refs to access current layer1 functions
+  const layerMutate = useMemo(() => [{
+    randomize: layer1.randomize,
+    shift: layer1.shift,
+    zero: layer1.zero
+  }, {
+    randomize: layer2.randomize,
+    shift: layer2.shift,
+    zero: layer2.zero
+  }], [layer1.randomize, layer1.shift, layer1.zero, layer2.randomize, layer2.shift, layer2.zero]);
 
   const toggleRefresh = useCallback(() => {
     console.log("toggleRefresh");
@@ -30,26 +41,26 @@ export default function Canvas() {
     
     const keyActions = {
         " ": () => {
-          layer1.randomize();
-          layer2.randomize();
+          layerMutate[0].randomize();
+          layerMutate[1].randomize();
         },
         "0": () => {
-          layer1.zero();
-          layer2.zero();
+          layerMutate[0].zero();
+          layerMutate[1].zero();
         },
-        "1": () => layer1.randomize(),
-        "2": () => layer2.randomize(),
+        "1": () => layerMutate[0].randomize(),
+        "2": () => layerMutate[1].randomize(),
         "+": () => setRefreshSeconds(refreshSeconds + 1),
         "-": () => setRefreshSeconds(refreshSeconds - 1),
         "=": toggleRefresh,
-        "ArrowUp": () => layer1.shift(1),
-        "ArrowDown": () => layer1.shift(-1),
-        "ArrowRight": () => layer2.shift(1),
-        "ArrowLeft": () => layer2.shift(-1),
+        "ArrowUp": () => layerMutate[0].shift(1),
+        "ArrowDown": () => layerMutate[0].shift(-1),
+        "ArrowRight": () => layerMutate[1].shift(1),
+        "ArrowLeft": () => layerMutate[1].shift(-1),
     }
 
     keyActions[key] && keyActions[key]();
-  }, [layer1, layer2, refreshSeconds, toggleRefresh]);
+  }, [layerMutate, refreshSeconds, toggleRefresh]);
 
   // Initialize
   useEffect(() => {
@@ -96,6 +107,13 @@ export default function Canvas() {
     window.addEventListener("keydown", keyDownListener);
     return () => window.removeEventListener("keydown", keyDownListener);
   }, [handleKeyDown]);
+
+  // Randomly updates layer 1 on refresh interval
+  useEffect(() => {
+    if (timer % refreshSeconds === 0) {
+      layerMutate[0].randomize(timer);
+    }
+  }, [layerMutate, timer, refreshSeconds]);
 
   return (
     <>
