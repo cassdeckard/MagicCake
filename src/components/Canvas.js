@@ -12,6 +12,7 @@ export default function Canvas() {
   const [refreshSeconds, setRefreshSeconds] = useState(DEFAULT_INTERVAL_SEC);
   const [bgEngineState, setBgEngineState] = useState({});
   const [engine, setEngine] = useState(null);
+  const [hideHud, setHideHud] = useState(false);
   const canvasRef = useRef(null);
 
   // Use custom hooks for layer logic
@@ -39,6 +40,11 @@ export default function Canvas() {
     setRefreshSeconds(refreshSeconds === 0 ? DEFAULT_INTERVAL_SEC : 0);
   }, [refreshSeconds, setRefreshSeconds]);
 
+  const toggleHideHud = useCallback(() => {
+    console.log("toggleHideHud");
+    setHideHud(!hideHud);
+  }, [hideHud, setHideHud]);
+
   // Handles keydown events
   const handleKeyDown = useCallback((key) => {
     console.log(`handleKeyDown: ${key}`);
@@ -57,6 +63,7 @@ export default function Canvas() {
         "+": () => setRefreshSeconds(refreshSeconds + 1),
         "-": () => setRefreshSeconds(refreshSeconds - 1),
         "=": toggleRefresh,
+        "Escape": toggleHideHud,
         "ArrowUp": () => layerMutate[0].shift(1),
         "ArrowDown": () => layerMutate[0].shift(-1),
         "ArrowRight": () => layerMutate[1].shift(1),
@@ -64,7 +71,7 @@ export default function Canvas() {
     }
 
     keyActions[key] && keyActions[key]();
-  }, [layerMutate, refreshSeconds, toggleRefresh]);
+  }, [layerMutate, refreshSeconds, toggleRefresh, toggleHideHud]);
 
   // Initialize
   useEffect(() => {
@@ -117,11 +124,11 @@ export default function Canvas() {
     if (countdown() === refreshSeconds) {
       layerMutate[0].randomize(timer);
     }
-  }, [layerMutate, timer, refreshSeconds]);
+  }, [layerMutate, timer, refreshSeconds, countdown]);
 
   return (
     <>
-      <div id="overlay">
+      <div id="overlay" hidden={hideHud}>
         <div id="overlay-content">
           <h1>
                 [{layer1.value}, {layer2.value}]
