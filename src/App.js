@@ -56,8 +56,9 @@ function Canvas() {
   return (
     <>
           <div id="overlay">
-            <h1>test overlay</h1>
-            <h2>{appSeconds}</h2>
+            <div id="overlay-content">
+              <h1>[{layer1}, {layer2}] ({appSeconds}s)</h1>
+            </div>
           </div>
           <canvas ref={canvasRef} id="canvas" className="full"></canvas>
     </>
