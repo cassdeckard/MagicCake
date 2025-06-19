@@ -12,18 +12,20 @@ export function useLayer(id, initialValue, appSeconds, refreshSeconds) {
 
   // Randomize Layer
   const randomize = useCallback((extra = 0) => {
+    console.log(`randomize; extra: ${extra}`);
     const newLayer = (Math.floor(Math.random() * 150) + extra) % MAX_LAYER_VALUE;
     setValue(newLayer);
-  }, [appSeconds]);
+  }, []);
 
   const zero = useCallback(() => {
+    console.log(`zero`);
     setValue(0);
   }, []);
 
   // Randomly updates layer on refresh interval
   useEffect(() => {
     if (appSeconds % refreshSeconds === 0 && id === "layer1") {
-      randomize();
+      randomize(appSeconds);
     }
   }, [appSeconds, refreshSeconds, id, randomize]);
 

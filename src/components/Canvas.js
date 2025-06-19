@@ -1,5 +1,5 @@
 import { setupEngine } from "@cassdeckard/ebbg";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 
 import { useLayer } from "../hooks/useLayer";
 import { useTimer } from "../hooks/useTimer";
@@ -19,36 +19,37 @@ export default function Canvas() {
   const layer1 = useLayer("layer1", DEFAULT_LAYER_1, timer, refreshSeconds);
   const layer2 = useLayer("layer2", DEFAULT_LAYER_2, timer, refreshSeconds);
 
+  const toggleRefresh = useCallback(() => {
+    console.log("toggleRefresh");
+    setRefreshSeconds(refreshSeconds === 0 ? DEFAULT_INTERVAL_SEC : 0);
+  }, [refreshSeconds, setRefreshSeconds]);
+
   // Handles keydown events
-  const handleKeyDown = (key) => {
-    console.log("key", key);
+  const handleKeyDown = useCallback((key) => {
+    console.log(`handleKeyDown: ${key}`);
+    
+    const keyActions = {
+        " ": () => {
+          layer1.randomize();
+          layer2.randomize();
+        },
+        "0": () => {
+          layer1.zero();
+          layer2.zero();
+        },
+        "1": () => layer1.randomize(),
+        "2": () => layer2.randomize(),
+        "+": () => setRefreshSeconds(refreshSeconds + 1),
+        "-": () => setRefreshSeconds(refreshSeconds - 1),
+        "=": toggleRefresh,
+        "ArrowUp": () => layer1.shift(1),
+        "ArrowDown": () => layer1.shift(-1),
+        "ArrowRight": () => layer2.shift(1),
+        "ArrowLeft": () => layer2.shift(-1),
+    }
 
     keyActions[key] && keyActions[key]();
-  };
-
-  const toggleRefresh = () => {
-    setRefreshSeconds(refreshSeconds === 0 ? DEFAULT_INTERVAL_SEC : 0);
-  }
-
-  const keyActions = {
-      " ": () => {
-        layer1.randomize();
-        layer2.zero();
-      },
-      "0": () => {
-        layer1.zero();
-        layer2.zero();
-      },
-      "1": () => layer1.randomize(),
-      "2": () => layer2.randomize(),
-      "+": () => setRefreshSeconds(refreshSeconds + 1),
-      "-": () => setRefreshSeconds(refreshSeconds - 1),
-      "=": toggleRefresh,
-      "ArrowUp": () => layer1.shift(1),
-      "ArrowDown": () => layer1.shift(-1),
-      "ArrowRight": () => layer2.shift(1),
-      "ArrowLeft": () => layer2.shift(-1),
-  }
+  }, [layer1, layer2, refreshSeconds, toggleRefresh]);
 
   // Initialize
   useEffect(() => {
@@ -69,11 +70,12 @@ export default function Canvas() {
 
   // Sync bgEngineState with layer values
   useEffect(() => {
-    setBgEngineState({
-      ...bgEngineState,
+    console.log("setBgEngineState");
+    setBgEngineState(prevState => ({
+      ...prevState,
       layer1: layer1.value,
       layer2: layer2.value
-    });
+    }));
   }, [layer1.value, layer2.value]);
 
   // Starts engine animation on engine mount/refresh
@@ -86,6 +88,7 @@ export default function Canvas() {
 
   // Subscribe handleKeyDown to keydown events
   useEffect(() => {
+    console.log("subscribe to keydown events");
     const keyDownListener = (event) => {
       const key = event.key;
       handleKeyDown(key);
