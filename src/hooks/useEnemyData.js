@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import yaml from 'js-yaml';
 
 export function useEnemyData() {
@@ -75,6 +75,7 @@ export function useEnemyData() {
         const enemies = group["Enemies"]
             .filter((enemy) => enemy["Amount"] > 0)
             .map((enemy) => enemyConfigurationTable[enemy["Enemy"]])
+            .filter((enemy) => enemy?.id && enemy?.data)
             .map((enemy) => ({
                 ...enemy,
                 toString: () => `<Enemy ${enemy.id}: ${enemy.data["Name"]}>`
@@ -95,9 +96,11 @@ export function useEnemyData() {
         };
     }, [enemyGroups, enemiesInGroup]);
 
-    return {
-        randomEnemyGroup,
-        enemiesInGroup,
-        error
-    };
+    const api = useMemo(() => ({
+      randomEnemyGroup,
+      enemiesInGroup,
+      error
+    }), [randomEnemyGroup, enemiesInGroup, error]);
+
+    return api;
 }

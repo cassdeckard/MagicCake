@@ -1,5 +1,5 @@
 import { setupEngine } from "@cassdeckard/ebbg";
-import { useEffect, useState, useRef, useCallback, useMemo } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 
 import { useLayer } from "../hooks/useLayer";
 import { useTimer } from "../hooks/useTimer";
@@ -26,22 +26,6 @@ export default function Canvas() {
     refreshSeconds - (timer % refreshSeconds),
   [refreshSeconds, timer])
 
-  // Memoize layer mutators to prevent unnecessary re-renders
-  const layerMutate = useMemo(() => [{
-    randomize: layer1.randomize,
-    shift: layer1.shift,
-    zero: layer1.zero
-  }, {
-    randomize: layer2.randomize,
-    shift: layer2.shift,
-    zero: layer2.zero
-  }], [layer1.randomize, layer1.shift, layer1.zero, layer2.randomize, layer2.shift, layer2.zero]);
-
-  const enemyFuncs = useMemo(() => ({
-    randomEnemyGroup: enemyData.randomEnemyGroup,
-    enemiesInGroup: enemyData.enemiesInGroup,
-  }), [enemyData.randomEnemyGroup, enemyData.enemiesInGroup]);
-
   const toggleRefresh = useCallback(() => {
     console.log("toggleRefresh");
     setRefreshSeconds(refreshSeconds === 0 ? DEFAULT_INTERVAL_SEC : 0);
@@ -58,27 +42,27 @@ export default function Canvas() {
     
     const keyActions = {
         " ": () => {
-          layerMutate[0].randomize();
-          layerMutate[1].randomize();
+          layer1.api.randomize();
+          layer2.api.randomize();
         },
         "0": () => {
-          layerMutate[0].zero();
-          layerMutate[1].zero();
+          layer1.api.zero();
+          layer2.api.zero();
         },
-        "1": () => layerMutate[0].randomize(),
-        "2": () => layerMutate[1].randomize(),
+        "1": () => layer1.api.randomize(),
+        "2": () => layer2.api.randomize(),
         "+": () => setRefreshSeconds(refreshSeconds + 1),
         "-": () => setRefreshSeconds(refreshSeconds - 1),
         "=": toggleRefresh,
         "Escape": toggleHideHud,
-        "ArrowUp": () => layerMutate[0].shift(1),
-        "ArrowDown": () => layerMutate[0].shift(-1),
-        "ArrowRight": () => layerMutate[1].shift(1),
-        "ArrowLeft": () => layerMutate[1].shift(-1),
+        "ArrowUp": () => layer1.api.shift(1),
+        "ArrowDown": () => layer1.api.shift(-1),
+        "ArrowRight": () => layer2.api.shift(1),
+        "ArrowLeft": () => layer2.api.shift(-1),
     }
 
     keyActions[key] && keyActions[key]();
-  }, [layerMutate, refreshSeconds, toggleRefresh, toggleHideHud]);
+  }, [layer1.api, layer2.api, refreshSeconds, toggleRefresh, toggleHideHud]);
 
   // Initialize
   useEffect(() => {
@@ -129,18 +113,18 @@ export default function Canvas() {
   // Randomly updates layer 1 on refresh interval
   useEffect(() => {
     if (countdown() === refreshSeconds) {
-      layerMutate[0].randomize(timer);
+      layer1.api.randomize(timer);
     }
-  }, [layerMutate, timer, refreshSeconds, countdown]);
+  }, [layer1.api, timer, refreshSeconds, countdown]);
 
   useEffect(() => {
-    if (enemyFuncs.randomEnemyGroup) {
-      console.log(`randomEnemyGroup: ${enemyFuncs.randomEnemyGroup()}`);
+    if (enemyData.randomEnemyGroup) {
+      console.log(`randomEnemyGroup: ${enemyData.randomEnemyGroup()}`);
     }
-    if (enemyFuncs.error) {
-      console.error("Enemy data error:", enemyFuncs.error);
+    if (enemyData.error) {
+      console.error("Enemy data error:", enemyData.error);
     }
-  }, [enemyFuncs]);
+  }, [enemyData]);
 
   return (
     <>

@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 
 const MAX_LAYER_VALUE = 327;
 
@@ -22,11 +22,15 @@ export function useLayer(id, initialValue) {
     setValue(0);
   }, []);
 
-  return {
-    value,
+  const api = useMemo(() => ({
     setValue,
     shift,
     randomize,
     zero
+  }), [setValue, shift, randomize, zero]);
+
+  return {
+    value,
+    api
   };
 } 
