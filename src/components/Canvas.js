@@ -14,6 +14,7 @@ export default function Canvas() {
   const [bgEngineState, setBgEngineState] = useState({});
   const [engine, setEngine] = useState(null);
   const [hideHud, setHideHud] = useState(false);
+  const [enemies, setEnemies] = useState([]);
   const canvasRef = useRef(null);
 
   // Use custom hooks for layer logic
@@ -36,15 +37,29 @@ export default function Canvas() {
     setHideHud(!hideHud);
   }, [hideHud, setHideHud]);
 
+  const randomizeLayers = useCallback(() => {
+    if (enemyData.error) {
+      console.error("Enemy data error:", enemyData.error);
+      return;
+    }
+    const randomEnemyGroup = enemyData.randomEnemyGroup();
+    if (!randomEnemyGroup) {
+      console.error("No random enemy group found");
+      return;
+    }
+    const enemies = enemyData.enemiesInGroup(randomEnemyGroup.id);
+    console.log(`enemies: ${enemies}`);
+    setEnemies(enemies);
+    layer1.api.setValue(randomEnemyGroup["Background 1"]);
+    layer2.api.setValue(randomEnemyGroup["Background 2"]);
+  }, [layer1.api, layer2.api, enemyData]);
+
   // Handles keydown events
   const handleKeyDown = useCallback((key) => {
     console.log(`handleKeyDown: ${key}`);
     
     const keyActions = {
-        " ": () => {
-          layer1.api.randomize();
-          layer2.api.randomize();
-        },
+        " ": () => randomizeLayers(),
         "0": () => {
           layer1.api.zero();
           layer2.api.zero();
@@ -62,7 +77,7 @@ export default function Canvas() {
     }
 
     keyActions[key] && keyActions[key]();
-  }, [layer1.api, layer2.api, refreshSeconds, toggleRefresh, toggleHideHud]);
+  }, [layer1.api, layer2.api, randomizeLayers, refreshSeconds, toggleRefresh, toggleHideHud]);
 
   // Initialize
   useEffect(() => {
@@ -113,18 +128,9 @@ export default function Canvas() {
   // Randomly updates layer 1 on refresh interval
   useEffect(() => {
     if (countdown() === refreshSeconds) {
-      layer1.api.randomize(timer);
+      randomizeLayers();
     }
-  }, [layer1.api, timer, refreshSeconds, countdown]);
-
-  useEffect(() => {
-    if (enemyData.randomEnemyGroup) {
-      console.log(`randomEnemyGroup: ${enemyData.randomEnemyGroup()}`);
-    }
-    if (enemyData.error) {
-      console.error("Enemy data error:", enemyData.error);
-    }
-  }, [enemyData]);
+  }, [randomizeLayers, refreshSeconds, countdown]);
 
   return (
     <>
@@ -134,6 +140,9 @@ export default function Canvas() {
                 [{layer1.value}, {layer2.value}]
                 ({countdown()} | {refreshSeconds})
           </h1>
+          <ul>
+            {enemies.map((enemy) => <li>{enemy.data.Name}</li>)}
+          </ul>
         </div>
       </div>
       <canvas ref={canvasRef} id="canvas" className="full"></canvas>

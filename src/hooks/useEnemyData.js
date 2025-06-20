@@ -65,7 +65,7 @@ export function useEnemyData() {
     }, []); // Empty dependency array - only run once
 
     const enemiesInGroup = useCallback((groupId) => {
-        if (!enemyConfigurationTable || !enemyGroups) {
+        if (!enemyConfigurationTable || !enemyGroups || !enemyGroups[groupId]) {
             return null;
         }
         const group = enemyGroups[groupId].data;
@@ -91,6 +91,7 @@ export function useEnemyData() {
         const randomEnemyGroup = enemyGroups[randomIndex]?.data;
         const enemiesListString = enemiesInGroup(randomIndex).map((enemy) => enemy.toString()).join(", ");
         return {
+            id: randomIndex,
             ...randomEnemyGroup,
             toString: () => `EnemyGroup(id: ${randomIndex}, Enemies: ${enemiesListString}, BG: ${randomEnemyGroup["Background 1"]}|${randomEnemyGroup["Background 2"]})`
         };

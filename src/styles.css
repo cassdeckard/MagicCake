@@ -48,8 +48,13 @@ div#overlay {
   padding: 0px;
   pointer-events: none;
 
-  text-shadow: 0 0 5px white;
+  text-shadow: 0 0 10px white;
   -webkit-text-stroke: 0.25px white;
+}
+
+div#overlay ul {
+  -webkit-text-stroke: 0.1px white;
+  font-weight: bold;
 }
 
 div#overlay-content {
