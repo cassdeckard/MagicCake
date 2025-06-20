@@ -83,6 +83,17 @@ export function useEnemyData() {
         return enemies;
     }, [enemyConfigurationTable, enemyGroups]);
 
+    const enemiesForBgLayers = useCallback((layer1, layer2) => {
+        if (!enemyGroups || enemyGroups.length === 0) {
+            return null;
+        }
+        const enemies = enemyGroups
+            .filter((group) => group.data["Background 1"] === layer1 && group.data["Background 2"] === layer2)
+            .flatMap((group) => enemiesInGroup(group.id))
+            .map((enemy) => enemy.data.Name);
+        return [...new Set(enemies)];
+    }, [enemyGroups, enemiesInGroup]);
+
     const randomEnemyGroup = useCallback(() => {
         if (!enemyGroups || enemyGroups.length === 0) {
             return null;
@@ -100,8 +111,9 @@ export function useEnemyData() {
     const api = useMemo(() => ({
       randomEnemyGroup,
       enemiesInGroup,
+      enemiesForBgLayers,
       error
-    }), [randomEnemyGroup, enemiesInGroup, error]);
+    }), [randomEnemyGroup, enemiesInGroup, enemiesForBgLayers, error]);
 
     return api;
 }

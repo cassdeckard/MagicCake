@@ -47,12 +47,18 @@ export default function Canvas() {
       console.error("No random enemy group found");
       return;
     }
-    const enemies = enemyData.enemiesInGroup(randomEnemyGroup.id);
-    console.log(`enemies: ${enemies}`);
-    setEnemies(enemies);
+    // const enemies = enemyData.enemiesInGroup(randomEnemyGroup.id);
+    // console.log(`enemies: ${enemies}`);
+    // setEnemies(enemies);
     layer1.api.setValue(randomEnemyGroup["Background 1"]);
     layer2.api.setValue(randomEnemyGroup["Background 2"]);
   }, [layer1.api, layer2.api, enemyData]);
+
+  // Set enemies on layer1 or layer2 value change
+  useEffect(() => {
+    const enemies = enemyData.enemiesForBgLayers(layer1.value, layer2.value);
+    setEnemies(enemies);
+  }, [layer1.value, layer2.value, enemyData]);
 
   // Handles keydown events
   const handleKeyDown = useCallback((key) => {
@@ -141,7 +147,7 @@ export default function Canvas() {
                 ({countdown()} | {refreshSeconds})
           </h1>
           <ul>
-            {enemies.map((enemy) => <li>{enemy.data.Name}</li>)}
+            {enemies?.map((enemy) => <li>{enemy}</li>)}
           </ul>
         </div>
       </div>
