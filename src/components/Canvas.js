@@ -131,7 +131,7 @@ export default function Canvas() {
     return () => window.removeEventListener("keydown", keyDownListener);
   }, [handleKeyDown]);
 
-  // Randomly updates layer 1 on refresh interval
+  // on refresh interval, updates background based on random enemy group
   useEffect(() => {
     if (countdown() === refreshSeconds) {
       randomizeLayers();

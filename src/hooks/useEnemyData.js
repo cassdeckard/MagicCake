@@ -66,11 +66,11 @@ export function useEnemyData() {
 
     const enemiesInGroup = useCallback((groupId) => {
         if (!enemyConfigurationTable || !enemyGroups || !enemyGroups[groupId]) {
-            return null;
+            return [];
         }
         const group = enemyGroups[groupId].data;
         if (!groupId) {
-            return null;
+            return [];
         }
         const enemies = group["Enemies"]
             .filter((enemy) => enemy["Amount"] > 0)
@@ -85,7 +85,7 @@ export function useEnemyData() {
 
     const enemiesForBgLayers = useCallback((layer1, layer2) => {
         if (!enemyGroups || enemyGroups.length === 0) {
-            return null;
+            return [];
         }
         const enemies = enemyGroups
             .filter((group) => group.data["Background 1"] === layer1 && group.data["Background 2"] === layer2)
