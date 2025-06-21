@@ -142,10 +142,10 @@ export default function Canvas() {
     <>
       <div id="overlay" hidden={hideHud}>
         <div id="overlay-content">
-          <h1>
+          <p>
                 [{layer1.value}, {layer2.value}]
                 ({countdown()} | {refreshSeconds})
-          </h1>
+          </p>
           <ul>
             {enemies?.map((enemy) => <li>{enemy}</li>)}
           </ul>

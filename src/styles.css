@@ -1,3 +1,12 @@
+@font-face {
+  font-family: 'Apple Kid';
+  src: url('./static/apple_kid_clean.woff2') format('woff2'),
+       url('./static/apple_kid_clean.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -49,14 +58,6 @@ div#overlay {
   left: 0px;
   z-index: 1000;
   pointer-events: none;
-
-  text-shadow: 0 0 10px white;
-  -webkit-text-stroke: 0.25px white;
-}
-
-div#overlay ul {
-  -webkit-text-stroke: 0.1px white;
-  font-weight: bold;
 }
 
 div#overlay-content {
@@ -64,8 +65,14 @@ div#overlay-content {
   top: 200px;
   left: 200px;
   margin: 0;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(16, 16, 16, 1);
   padding: 10px;
   pointer-events: auto;
+
+  border: 16px solid transparent;
+
+  border-image: url('./static/eb-battle-hud-9slice.png') 16;
+
+  font-family: 'Apple Kid', sans-serif;
+  color: white;
 }
