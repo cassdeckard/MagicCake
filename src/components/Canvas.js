@@ -9,11 +9,10 @@ const DEFAULT_LAYER_1 = 86;
 const DEFAULT_LAYER_2 = 0;
 const DEFAULT_INTERVAL_SEC = 60;
 
-export default function Canvas() {
+export default function Canvas({ hideHud, toggleHideHud }) {
   const [refreshSeconds, setRefreshSeconds] = useState(DEFAULT_INTERVAL_SEC);
   const [bgEngineState, setBgEngineState] = useState({});
   const [engine, setEngine] = useState(null);
-  const [hideHud, setHideHud] = useState(false);
   const [enemies, setEnemies] = useState([]);
   const canvasRef = useRef(null);
 
@@ -31,11 +30,6 @@ export default function Canvas() {
     console.log("toggleRefresh");
     setRefreshSeconds(refreshSeconds === 0 ? DEFAULT_INTERVAL_SEC : 0);
   }, [refreshSeconds, setRefreshSeconds]);
-
-  const toggleHideHud = useCallback(() => {
-    console.log("toggleHideHud");
-    setHideHud(!hideHud);
-  }, [hideHud, setHideHud]);
 
   const randomizeLayers = useCallback(() => {
     if (enemyData.error) {
