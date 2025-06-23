@@ -39,7 +39,7 @@ jobs:
         path: build
 
   deploy:
-    if: github.ref == 'refs/heads/gh-pages'  # Only deploy from gh-pages
+    if: github.ref == 'refs/heads/main'  # Only deploy from main
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
