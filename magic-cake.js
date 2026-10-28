@@ -165,12 +165,12 @@ let vf
 if (mode === 'fit') vf = `scale=${W}:${H}:flags=neighbor:force_original_aspect_ratio=decrease,pad=${W}:${H}:(ow-iw)/2:(oh-ih)/2`
 else if (mode === 'stretch') vf = `scale=${W}:${H}:flags=neighbor`
 else vf = `scale=${W}:${H}:flags=neighbor:force_original_aspect_ratio=increase,crop=${W}:${H}`
-vf += ',setsar=1,format=yuv420p'
+vf += ',setsar=1,scale=out_color_matrix=bt709:out_range=tv,format=yuv420p,setparams=color_primaries=bt709:color_trc=bt709:colorspace=bt709:range=tv'
 
 const ff = ['-hide_banner', '-loglevel', 'error', '-y',
   '-f', 'rawvideo', '-pix_fmt', 'rgba', '-s', `${SNES_WIDTH}x${SNES_HEIGHT}`, '-r', String(fps), '-i', 'pipe:0']
 if (opt.mux) ff.push('-i', opt.audio)
-ff.push('-vf', vf, '-c:v', 'libx264', '-preset', 'medium', '-crf', String(opt.crf || 18), '-pix_fmt', 'yuv420p', '-movflags', '+faststart')
+ff.push('-vf', vf, '-c:v', 'libx264', '-preset', 'medium', '-crf', String(opt.crf || 18), '-pix_fmt', 'yuv420p', '-colorspace', 'bt709', '-color_primaries', 'bt709', '-color_trc', 'bt709', '-color_range', 'tv', '-movflags', '+faststart')
 if (opt.mux) ff.push('-map', '0:v', '-map', '1:a', '-c:a', 'aac', '-b:a', '256k', '-shortest')
 ff.push(out)
 const proc = spawn('ffmpeg', ff, { stdio: ['pipe', 'inherit', 'inherit'] })
