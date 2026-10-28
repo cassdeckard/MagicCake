@@ -31,7 +31,7 @@ Options:
   --crt <none|royale> CRT TV look (scanlines, phosphor mask, bloom, curvature);
                       inspired by RetroArch's crt-royale. Default none
   --crt-mask <aperture|slot|shadow>   phosphor mask (default aperture)
-  --crt-curvature <0-1>  screen curvature (default 0.35, 0 = flat)
+  --crt-curvature <0-1>  screen curvature (default 0 = flat)
   --crt-bloom <0-1>   glow around bright areas (default 0.25)
   --crt-scanline <0-1>  scanline strength (default 1)
   --crt-triad <px>    phosphor triad width in output pixels (default 3)

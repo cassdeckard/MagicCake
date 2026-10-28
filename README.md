@@ -128,7 +128,7 @@ or just add `eval "$(magic-cake --completion bash)"` to `~/.bashrc`.
 
 ```
 magic-cake 270 269 out.mp4 --crt royale --audio song.flac
-magic-cake black-antoid-2 out.mp4 --crt royale --crt-mask slot --crt-curvature 0 --crt-bloom 0.4
+magic-cake black-antoid-2 out.mp4 --crt royale --crt-mask slot --crt-bloom 0.4
 ```
 
 Draws the background as if shown on a CRT: one scanline per row of the game's
@@ -143,7 +143,7 @@ barrel curvature, rounded corners and a vignette. It works with all three
 |---|---|---|
 | `--crt` | `none`, `royale` | `none` |
 | `--crt-mask` | `aperture` (Trinitron stripes), `slot`, `shadow` | `aperture` |
-| `--crt-curvature` | 0–1 (0 = flat) | 0.35 |
+| `--crt-curvature` | 0–1 (0 = flat) | 0 |
 | `--crt-bloom` | 0–2 | 0.25 |
 | `--crt-scanline` | 0–1 scanline strength | 1 |
 | `--crt-triad` | phosphor triad width in output px, 2–12 | 3 |
