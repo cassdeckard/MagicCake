@@ -222,3 +222,10 @@ later**, so none of its shader code was copied or translated here: `lib/crt.js`
 is an independent implementation written from scratch, inspired by its
 published design and parameter choices, and is MIT-licensed with the rest of
 this repo.
+
+## License
+
+MIT, see [LICENSE](LICENSE). Rendering code and background data in `vendor/` come from
+[Earthbound-Battle-Backgrounds-JS](https://github.com/gjtorikian/Earthbound-Battle-Backgrounds-JS)
+(MIT, © 2017 Garen Torikian, kdex). EarthBound and its graphics are © Nintendo / Ape / HAL
+Laboratory; this is an unofficial fan project.
