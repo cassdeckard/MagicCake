@@ -123,3 +123,46 @@ magic-cake --completion bash > "$(brew --prefix)/etc/bash_completion.d/magic-cak
 ```
 
 or just add `eval "$(magic-cake --completion bash)"` to `~/.bashrc`.
+
+## CRT look (`--crt royale`)
+
+```
+magic-cake 270 269 out.mp4 --crt royale --audio song.flac
+magic-cake black-antoid-2 out.mp4 --crt royale --crt-mask slot --crt-curvature 0 --crt-bloom 0.4
+```
+
+Draws the background as if shown on a CRT: one scanline per row of the game's
+256×224 picture (so 224 lines over the full frame, fewer when `--mode fill`
+crops rows), beams that widen and flatten as they get brighter, a soft
+horizontal reconstruction filter, an RGB phosphor mask drawn in output pixels
+(with brightness compensation), bloom/halation and glass diffusion, gentle
+barrel curvature, rounded corners and a vignette. It works with all three
+`--mode`s (with `fit` the curved "tube" sits between the black bars).
+
+| option | values | default |
+|---|---|---|
+| `--crt` | `none`, `royale` | `none` |
+| `--crt-mask` | `aperture` (Trinitron stripes), `slot`, `shadow` | `aperture` |
+| `--crt-curvature` | 0–1 (0 = flat) | 0.35 |
+| `--crt-bloom` | 0–2 | 0.25 |
+| `--crt-scanline` | 0–1 scanline strength | 1 |
+| `--crt-triad` | phosphor triad width in output px, 2–12 | 3 |
+| `--crt-threads` | worker threads | all cores |
+
+Runs on the CPU in worker threads; about 30 fps at 1280×720 on an 8-core
+machine including encoding (a 4-minute song ≈ 4 minutes). The phosphor mask is
+pixel-exact, so keep the output at its final size; heavy scaling or very low
+`--crf` values will blur or moiré it. Note that x264's 4:2:0 chroma subsampling
+(and YouTube's re-encode) softens the colored mask stripes into a finer texture.
+
+### Credit and licensing
+
+The look is modeled on **crt-royale** by TroggleMonkey (libretro
+`slang-shaders/crt/crt-royale`), whose user-settings.h documents the approach
+and default parameters (CRT gamma ~2.4–2.5 in / 2.2 out, brightness-dependent
+generalized-Gaussian beam widths, aperture grille / slot / shadow masks,
+halation and diffusion, border rounding). crt-royale is licensed **GPLv2 or
+later**, so none of its shader code was copied or translated here: `lib/crt.js`
+is an independent implementation written from scratch, inspired by its
+published design and parameter choices, and is MIT-licensed with the rest of
+this repo.
