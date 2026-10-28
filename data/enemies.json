@@ -1,0 +1,2528 @@
+{
+ "source": "https://github.com/cassdeckard/MagicCake-archive (public/data/enemy_groups.yml + enemy_configuration_table.yml)",
+ "enemies": {
+  "abstract-art": {
+   "name": "Abstract Art",
+   "bgs": [
+    [
+     44,
+     0
+    ]
+   ]
+  },
+  "annoying-old-party-man": {
+   "name": "Annoying Old Party Man",
+   "bgs": [
+    [
+     14,
+     0
+    ]
+   ]
+  },
+  "annoying-reveler": {
+   "name": "Annoying Reveler",
+   "bgs": [
+    [
+     42,
+     0
+    ]
+   ]
+  },
+  "arachnid": {
+   "name": "Arachnid!",
+   "bgs": [
+    [
+     73,
+     0
+    ],
+    [
+     74,
+     0
+    ],
+    [
+     78,
+     0
+    ],
+    [
+     95,
+     0
+    ],
+    [
+     96,
+     0
+    ]
+   ]
+  },
+  "armored-frog": {
+   "name": "Armored Frog",
+   "bgs": [
+    [
+     32,
+     0
+    ],
+    [
+     30,
+     0
+    ],
+    [
+     316,
+     0
+    ],
+    [
+     317,
+     0
+    ],
+    [
+     31,
+     0
+    ]
+   ]
+  },
+  "atomic-power-robot": {
+   "name": "Atomic Power Robot",
+   "bgs": [
+    [
+     151,
+     0
+    ],
+    [
+     243,
+     0
+    ],
+    [
+     286,
+     0
+    ],
+    [
+     271,
+     0
+    ],
+    [
+     287,
+     0
+    ]
+   ]
+  },
+  "attack-slug": {
+   "name": "Attack Slug",
+   "bgs": [
+    [
+     72,
+     0
+    ],
+    [
+     75,
+     0
+    ],
+    [
+     81,
+     0
+    ],
+    [
+     80,
+     0
+    ]
+   ]
+  },
+  "bad-buffalo": {
+   "name": "Bad Buffalo",
+   "bgs": [
+    [
+     35,
+     0
+    ],
+    [
+     36,
+     0
+    ]
+   ]
+  },
+  "beautiful-ufo": {
+   "name": "Beautiful UFO",
+   "bgs": [
+    [
+     53,
+     0
+    ],
+    [
+     54,
+     0
+    ],
+    [
+     321,
+     0
+    ]
+   ]
+  },
+  "big-pile-of-puke": {
+   "name": "Big Pile of Puke",
+   "bgs": [
+    [
+     58,
+     0
+    ]
+   ]
+  },
+  "bionic-kraken": {
+   "name": "Bionic Kraken",
+   "bgs": [
+    [
+     109,
+     0
+    ]
+   ]
+  },
+  "black-antoid": {
+   "name": "Black Antoid",
+   "bgs": [
+    [
+     9,
+     0
+    ],
+    [
+     10,
+     0
+    ],
+    [
+     317,
+     0
+    ],
+    [
+     32,
+     0
+    ],
+    [
+     80,
+     0
+    ],
+    [
+     81,
+     0
+    ],
+    [
+     79,
+     0
+    ],
+    [
+     170,
+     169
+    ]
+   ]
+  },
+  "boogey-tent": {
+   "name": "Boogey Tent",
+   "bgs": [
+    [
+     293,
+     292
+    ]
+   ]
+  },
+  "captain-strong": {
+   "name": "Captain Strong",
+   "bgs": [
+    [
+     184,
+     183
+    ]
+   ]
+  },
+  "carbon-dog": {
+   "name": "Carbon Dog",
+   "bgs": [
+    [
+     166,
+     165
+    ]
+   ]
+  },
+  "care-free-bomb": {
+   "name": "Care Free Bomb",
+   "bgs": [
+    [
+     71,
+     0
+    ],
+    [
+     322,
+     0
+    ]
+   ]
+  },
+  "cave-boy": {
+   "name": "Cave Boy",
+   "bgs": [
+    [
+     314,
+     0
+    ],
+    [
+     131,
+     0
+    ],
+    [
+     125,
+     0
+    ]
+   ]
+  },
+  "chomposaur": {
+   "name": "Chomposaur",
+   "bgs": [
+    [
+     65,
+     0
+    ]
+   ]
+  },
+  "clumsy-robot": {
+   "name": "Clumsy Robot",
+   "bgs": [
+    [
+     285,
+     0
+    ]
+   ]
+  },
+  "coil-snake": {
+   "name": "Coil Snake",
+   "bgs": [
+    [
+     261,
+     0
+    ],
+    [
+     306,
+     307
+    ],
+    [
+     3,
+     0
+    ]
+   ]
+  },
+  "conducting-menace": {
+   "name": "Conducting Menace",
+   "bgs": [
+    [
+     305,
+     0
+    ],
+    [
+     146,
+     0
+    ],
+    [
+     144,
+     0
+    ],
+    [
+     145,
+     0
+    ]
+   ]
+  },
+  "conducting-spirit": {
+   "name": "Conducting Spirit",
+   "bgs": [
+    [
+     100,
+     0
+    ],
+    [
+     309,
+     0
+    ],
+    [
+     103,
+     0
+    ],
+    [
+     311,
+     0
+    ],
+    [
+     102,
+     0
+    ],
+    [
+     310,
+     0
+    ]
+   ]
+  },
+  "cop": {
+   "name": "Cop",
+   "bgs": [
+    [
+     1,
+     0
+    ],
+    [
+     184,
+     183
+    ]
+   ]
+  },
+  "cranky-lady": {
+   "name": "Cranky Lady",
+   "bgs": [
+    [
+     14,
+     0
+    ]
+   ]
+  },
+  "crazed-sign": {
+   "name": "Crazed Sign",
+   "bgs": [
+    [
+     40,
+     0
+    ],
+    [
+     203,
+     202
+    ],
+    [
+     48,
+     0
+    ]
+   ]
+  },
+  "crested-booka": {
+   "name": "Crested Booka",
+   "bgs": [
+    [
+     318,
+     0
+    ],
+    [
+     36,
+     0
+    ],
+    [
+     319,
+     0
+    ]
+   ]
+  },
+  "criminal-caterpillar": {
+   "name": "Criminal Caterpillar",
+   "bgs": [
+    [
+     266,
+     267
+    ]
+   ]
+  },
+  "cute-li-l-ufo": {
+   "name": "Cute Li'l UFO",
+   "bgs": [
+    [
+     259,
+     0
+    ],
+    [
+     318,
+     0
+    ],
+    [
+     319,
+     0
+    ],
+    [
+     155,
+     0
+    ]
+   ]
+  },
+  "dali-s-clock": {
+   "name": "Dali's Clock",
+   "bgs": [
+    [
+     43,
+     0
+    ],
+    [
+     158,
+     0
+    ]
+   ]
+  },
+  "deadly-mouse": {
+   "name": "Deadly Mouse",
+   "bgs": [
+    [
+     143,
+     0
+    ]
+   ]
+  },
+  "demonic-petunia": {
+   "name": "Demonic Petunia",
+   "bgs": [
+    [
+     59,
+     0
+    ]
+   ]
+  },
+  "dept-store-spook": {
+   "name": "Dept. Store Spook",
+   "bgs": [
+    [
+     197,
+     0
+    ]
+   ]
+  },
+  "desert-wolf": {
+   "name": "Desert Wolf",
+   "bgs": [
+    [
+     35,
+     0
+    ],
+    [
+     38,
+     0
+    ],
+    [
+     36,
+     0
+    ]
+   ]
+  },
+  "dread-skelpion": {
+   "name": "Dread Skelpion",
+   "bgs": [
+    [
+     56,
+     0
+    ],
+    [
+     52,
+     0
+    ]
+   ]
+  },
+  "ego-orb": {
+   "name": "Ego Orb",
+   "bgs": [
+    [
+     66,
+     0
+    ]
+   ]
+  },
+  "elder-batty": {
+   "name": "Elder Batty",
+   "bgs": [
+    [
+     73,
+     0
+    ]
+   ]
+  },
+  "electro-specter": {
+   "name": "Electro Specter",
+   "bgs": [
+    [
+     164,
+     163
+    ]
+   ]
+  },
+  "electro-swoosh": {
+   "name": "Electro Swoosh",
+   "bgs": [
+    [
+     268,
+     0
+    ]
+   ]
+  },
+  "enraged-fire-plug": {
+   "name": "Enraged Fire Plug",
+   "bgs": [
+    [
+     189,
+     0
+    ],
+    [
+     320,
+     0
+    ],
+    [
+     288,
+     0
+    ],
+    [
+     45,
+     258
+    ],
+    [
+     162,
+     0
+    ],
+    [
+     43,
+     0
+    ]
+   ]
+  },
+  "even-slimier-little-pile": {
+   "name": "Even Slimier Little Pile",
+   "bgs": [
+    [
+     58,
+     0
+    ],
+    [
+     62,
+     0
+    ]
+   ]
+  },
+  "everdred": {
+   "name": "Everdred",
+   "bgs": [
+    [
+     273,
+     272
+    ]
+   ]
+  },
+  "evil-elemental": {
+   "name": "Evil Elemental",
+   "bgs": [
+    [
+     104,
+     0
+    ],
+    [
+     299,
+     0
+    ],
+    [
+     325,
+     0
+    ]
+   ]
+  },
+  "evil-eye": {
+   "name": "Evil Eye",
+   "bgs": [
+    [
+     114,
+     0
+    ],
+    [
+     116,
+     0
+    ],
+    [
+     117,
+     0
+    ]
+   ]
+  },
+  "evil-mani-mani": {
+   "name": "Evil Mani-Mani",
+   "bgs": [
+    [
+     302,
+     0
+    ]
+   ]
+  },
+  "extra-cranky-lady": {
+   "name": "Extra Cranky Lady",
+   "bgs": [
+    [
+     39,
+     0
+    ]
+   ]
+  },
+  "farm-zombie": {
+   "name": "Farm Zombie",
+   "bgs": [
+    [
+     32,
+     0
+    ],
+    [
+     30,
+     0
+    ],
+    [
+     316,
+     0
+    ],
+    [
+     31,
+     0
+    ],
+    [
+     281,
+     282
+    ]
+   ]
+  },
+  "fierce-shattered-man": {
+   "name": "Fierce Shattered Man",
+   "bgs": [
+    [
+     294,
+     0
+    ],
+    [
+     96,
+     0
+    ],
+    [
+     98,
+     0
+    ],
+    [
+     97,
+     0
+    ]
+   ]
+  },
+  "filthy-attack-roach": {
+   "name": "Filthy Attack Roach",
+   "bgs": [
+    [
+     141,
+     0
+    ],
+    [
+     140,
+     0
+    ]
+   ]
+  },
+  "final-starman": {
+   "name": "Final Starman",
+   "bgs": [
+    [
+     110,
+     0
+    ],
+    [
+     300,
+     0
+    ],
+    [
+     301,
+     0
+    ]
+   ]
+  },
+  "fobby": {
+   "name": "Fobby",
+   "bgs": [
+    [
+     290,
+     0
+    ],
+    [
+     291,
+     0
+    ],
+    [
+     289,
+     0
+    ],
+    [
+     312,
+     0
+    ],
+    [
+     100,
+     0
+    ],
+    [
+     102,
+     0
+    ]
+   ]
+  },
+  "foppy": {
+   "name": "Foppy",
+   "bgs": [
+    [
+     274,
+     275
+    ],
+    [
+     276,
+     277
+    ]
+   ]
+  },
+  "frank": {
+   "name": "Frank",
+   "bgs": [
+    [
+     180,
+     179
+    ]
+   ]
+  },
+  "frankystein-mark-ii": {
+   "name": "Frankystein Mark II",
+   "bgs": [
+    [
+     182,
+     181
+    ]
+   ]
+  },
+  "french-kiss-of-death": {
+   "name": "French Kiss of Death",
+   "bgs": [
+    [
+     70,
+     0
+    ],
+    [
+     268,
+     0
+    ]
+   ]
+  },
+  "ghost-of-starman": {
+   "name": "Ghost of Starman",
+   "bgs": [
+    [
+     114,
+     0
+    ],
+    [
+     115,
+     0
+    ],
+    [
+     117,
+     0
+    ],
+    [
+     297,
+     0
+    ],
+    [
+     107,
+     0
+    ],
+    [
+     300,
+     0
+    ],
+    [
+     301,
+     0
+    ]
+   ]
+  },
+  "gigantic-ant": {
+   "name": "Gigantic Ant",
+   "bgs": [
+    [
+     139,
+     0
+    ],
+    [
+     138,
+     0
+    ],
+    [
+     137,
+     0
+    ]
+   ]
+  },
+  "giygas": {
+   "name": "Giygas",
+   "bgs": [
+    [
+     220,
+     0
+    ],
+    [
+     222,
+     221
+    ],
+    [
+     224,
+     223
+    ],
+    [
+     225,
+     0
+    ],
+    [
+     226,
+     0
+    ],
+    [
+     227,
+     0
+    ],
+    [
+     265,
+     0
+    ]
+   ]
+  },
+  "great-crested-booka": {
+   "name": "Great Crested Booka",
+   "bgs": [
+    [
+     56,
+     0
+    ],
+    [
+     52,
+     0
+    ]
+   ]
+  },
+  "gruff-goat": {
+   "name": "Gruff Goat",
+   "bgs": [
+    [
+     122,
+     0
+    ],
+    [
+     127,
+     0
+    ]
+   ]
+  },
+  "guardian-digger": {
+   "name": "Guardian Digger",
+   "bgs": [
+    [
+     196,
+     0
+    ]
+   ]
+  },
+  "guardian-general": {
+   "name": "Guardian General",
+   "bgs": [
+    [
+     208,
+     0
+    ]
+   ]
+  },
+  "guardian-hieroglyph": {
+   "name": "Guardian Hieroglyph",
+   "bgs": [
+    [
+     95,
+     0
+    ],
+    [
+     98,
+     0
+    ],
+    [
+     97,
+     0
+    ]
+   ]
+  },
+  "handsome-tom": {
+   "name": "Handsome Tom",
+   "bgs": [
+    [
+     3,
+     0
+    ],
+    [
+     15,
+     0
+    ],
+    [
+     25,
+     0
+    ]
+   ]
+  },
+  "hard-crocodile": {
+   "name": "Hard Crocodile",
+   "bgs": [
+    [
+     60,
+     0
+    ],
+    [
+     62,
+     0
+    ],
+    [
+     63,
+     0
+    ]
+   ]
+  },
+  "heavily-armed-pokey": {
+   "name": "Heavily Armed Pokey",
+   "bgs": [
+    [
+     220,
+     0
+    ],
+    [
+     222,
+     221
+    ]
+   ]
+  },
+  "high-class-ufo": {
+   "name": "High-class UFO",
+   "bgs": [
+    [
+     53,
+     0
+    ],
+    [
+     321,
+     0
+    ]
+   ]
+  },
+  "hostile-elder-oak": {
+   "name": "Hostile Elder Oak",
+   "bgs": [
+    [
+     57,
+     0
+    ],
+    [
+     59,
+     0
+    ]
+   ]
+  },
+  "hyper-spinning-robo": {
+   "name": "Hyper Spinning Robo",
+   "bgs": [
+    [
+     102,
+     0
+    ],
+    [
+     311,
+     0
+    ],
+    [
+     310,
+     0
+    ],
+    [
+     103,
+     0
+    ]
+   ]
+  },
+  "insane-cultist": {
+   "name": "Insane Cultist",
+   "bgs": [
+    [
+     16,
+     0
+    ],
+    [
+     306,
+     307
+    ],
+    [
+     307,
+     306
+    ]
+   ]
+  },
+  "kiss-of-death": {
+   "name": "Kiss of Death",
+   "bgs": [
+    [
+     146,
+     0
+    ],
+    [
+     144,
+     0
+    ]
+   ]
+  },
+  "kraken": {
+   "name": "Kraken",
+   "bgs": [
+    [
+     201,
+     200
+    ]
+   ]
+  },
+  "lesser-mook": {
+   "name": "Lesser Mook",
+   "bgs": [
+    [
+     125,
+     0
+    ],
+    [
+     313,
+     0
+    ],
+    [
+     315,
+     0
+    ],
+    [
+     161,
+     0
+    ]
+   ]
+  },
+  "lethal-asp-hieroglyph": {
+   "name": "Lethal Asp Hieroglyph",
+   "bgs": [
+    [
+     96,
+     0
+    ],
+    [
+     99,
+     0
+    ]
+   ]
+  },
+  "li-l-ufo": {
+   "name": "Li'l UFO",
+   "bgs": [
+    [
+     21,
+     0
+    ],
+    [
+     20,
+     0
+    ],
+    [
+     22,
+     0
+    ]
+   ]
+  },
+  "loaded-dice": {
+   "name": "Loaded Dice",
+   "bgs": [
+    [
+     67,
+     0
+    ],
+    [
+     323,
+     0
+    ]
+   ]
+  },
+  "mad-duck": {
+   "name": "Mad Duck",
+   "bgs": [
+    [
+     33,
+     0
+    ],
+    [
+     137,
+     0
+    ],
+    [
+     139,
+     0
+    ],
+    [
+     136,
+     0
+    ],
+    [
+     138,
+     0
+    ],
+    [
+     213,
+     212
+    ]
+   ]
+  },
+  "mad-taxi": {
+   "name": "Mad Taxi",
+   "bgs": [
+    [
+     41,
+     0
+    ],
+    [
+     203,
+     202
+    ],
+    [
+     83,
+     0
+    ]
+   ]
+  },
+  "major-psychic-psycho": {
+   "name": "Major Psychic Psycho",
+   "bgs": [
+    [
+     105,
+     0
+    ],
+    [
+     303,
+     0
+    ]
+   ]
+  },
+  "manly-fish": {
+   "name": "Manly Fish",
+   "bgs": [
+    [
+     62,
+     0
+    ],
+    [
+     63,
+     0
+    ]
+   ]
+  },
+  "manly-fish-s-brother": {
+   "name": "Manly Fish's Brother",
+   "bgs": [
+    [
+     63,
+     0
+    ]
+   ]
+  },
+  "marauder-octobot": {
+   "name": "Marauder Octobot",
+   "bgs": [
+    [
+     53,
+     0
+    ],
+    [
+     55,
+     0
+    ]
+   ]
+  },
+  "master-barf": {
+   "name": "Master Barf",
+   "bgs": [
+    [
+     211,
+     210
+    ]
+   ]
+  },
+  "master-belch": {
+   "name": "Master Belch",
+   "bgs": [
+    [
+     194,
+     193
+    ]
+   ]
+  },
+  "master-criminal-worm": {
+   "name": "Master Criminal Worm",
+   "bgs": [
+    [
+     190,
+     326
+    ]
+   ]
+  },
+  "mechanical-octobot": {
+   "name": "Mechanical Octobot",
+   "bgs": [
+    [
+     115,
+     0
+    ],
+    [
+     116,
+     0
+    ],
+    [
+     117,
+     0
+    ]
+   ]
+  },
+  "mighty-bear": {
+   "name": "Mighty Bear",
+   "bgs": [
+    [
+     73,
+     0
+    ],
+    [
+     82,
+     0
+    ],
+    [
+     76,
+     0
+    ]
+   ]
+  },
+  "mighty-bear-seven": {
+   "name": "Mighty Bear Seven",
+   "bgs": [
+    [
+     131,
+     0
+    ],
+    [
+     125,
+     0
+    ]
+   ]
+  },
+  "military-octobot": {
+   "name": "Military Octobot",
+   "bgs": [
+    [
+     148,
+     0
+    ],
+    [
+     243,
+     0
+    ],
+    [
+     287,
+     0
+    ]
+   ]
+  },
+  "mini-barf": {
+   "name": "Mini Barf",
+   "bgs": [
+    [
+     192,
+     191
+    ]
+   ]
+  },
+  "mobile-sprout": {
+   "name": "Mobile Sprout",
+   "bgs": [
+    [
+     9,
+     0
+    ],
+    [
+     11,
+     0
+    ],
+    [
+     21,
+     0
+    ],
+    [
+     20,
+     0
+    ],
+    [
+     212,
+     213
+    ]
+   ]
+  },
+  "mole-playing-rough": {
+   "name": "Mole Playing Rough",
+   "bgs": [
+    [
+     82,
+     0
+    ],
+    [
+     73,
+     0
+    ],
+    [
+     259,
+     0
+    ],
+    [
+     49,
+     0
+    ],
+    [
+     60,
+     0
+    ]
+   ]
+  },
+  "mondo-mole": {
+   "name": "Mondo Mole",
+   "bgs": [
+    [
+     172,
+     171
+    ]
+   ]
+  },
+  "mook-senior": {
+   "name": "Mook Senior",
+   "bgs": [
+    [
+     161,
+     0
+    ],
+    [
+     160,
+     0
+    ],
+    [
+     198,
+     0
+    ],
+    [
+     151,
+     0
+    ],
+    [
+     324,
+     0
+    ]
+   ]
+  },
+  "mostly-bad-fly": {
+   "name": "Mostly Bad Fly",
+   "bgs": [
+    [
+     280,
+     0
+    ]
+   ]
+  },
+  "mr-batty": {
+   "name": "Mr. Batty",
+   "bgs": [
+    [
+     73,
+     0
+    ],
+    [
+     76,
+     0
+    ],
+    [
+     89,
+     0
+    ]
+   ]
+  },
+  "mr-carpainter": {
+   "name": "Mr. Carpainter",
+   "bgs": [
+    [
+     278,
+     0
+    ]
+   ]
+  },
+  "mr-molecule": {
+   "name": "Mr. Molecule",
+   "bgs": [
+    [
+     71,
+     0
+    ],
+    [
+     68,
+     0
+    ]
+   ]
+  },
+  "musica": {
+   "name": "Musica",
+   "bgs": [
+    [
+     85,
+     0
+    ],
+    [
+     86,
+     0
+    ]
+   ]
+  },
+  "mystical-record": {
+   "name": "Mystical Record",
+   "bgs": [
+    [
+     85,
+     0
+    ],
+    [
+     86,
+     0
+    ],
+    [
+     87,
+     0
+    ],
+    [
+     84,
+     0
+    ],
+    [
+     159,
+     0
+    ]
+   ]
+  },
+  "new-age-retro-hippie": {
+   "name": "New Age Retro Hippie",
+   "bgs": [
+    [
+     269,
+     270
+    ]
+   ]
+  },
+  "no-good-fly": {
+   "name": "No Good Fly",
+   "bgs": [
+    [
+     28,
+     0
+    ],
+    [
+     27,
+     0
+    ],
+    [
+     154,
+     0
+    ]
+   ]
+  },
+  "noose-man": {
+   "name": "Noose Man",
+   "bgs": [
+    [
+     136,
+     0
+    ],
+    [
+     138,
+     0
+    ],
+    [
+     137,
+     0
+    ]
+   ]
+  },
+  "nuclear-reactor-robot": {
+   "name": "Nuclear Reactor Robot",
+   "bgs": [
+    [
+     297,
+     0
+    ],
+    [
+     209,
+     0
+    ],
+    [
+     107,
+     0
+    ],
+    [
+     110,
+     0
+    ],
+    [
+     301,
+     0
+    ]
+   ]
+  },
+  "over-zealous-cop": {
+   "name": "Over Zealous Cop",
+   "bgs": [
+    [
+     49,
+     0
+    ]
+   ]
+  },
+  "petrified-royal-guard": {
+   "name": "Petrified Royal Guard",
+   "bgs": [
+    [
+     96,
+     0
+    ],
+    [
+     97,
+     0
+    ],
+    [
+     98,
+     0
+    ]
+   ]
+  },
+  "pit-bull-slug": {
+   "name": "Pit Bull Slug",
+   "bgs": [
+    [
+     61,
+     0
+    ]
+   ]
+  },
+  "plague-rat-of-doom": {
+   "name": "Plague Rat of Doom",
+   "bgs": [
+    [
+     178,
+     177
+    ]
+   ]
+  },
+  "plain-crocodile": {
+   "name": "Plain Crocodile",
+   "bgs": [
+    [
+     31,
+     0
+    ],
+    [
+     316,
+     0
+    ],
+    [
+     317,
+     0
+    ],
+    [
+     32,
+     0
+    ]
+   ]
+  },
+  "pogo-punk": {
+   "name": "Pogo Punk",
+   "bgs": [
+    [
+     6,
+     0
+    ],
+    [
+     7,
+     0
+    ],
+    [
+     8,
+     0
+    ]
+   ]
+  },
+  "psychic-psycho": {
+   "name": "Psychic Psycho",
+   "bgs": [
+    [
+     303,
+     0
+    ],
+    [
+     105,
+     0
+    ],
+    [
+     325,
+     0
+    ]
+   ]
+  },
+  "putrid-moldyman": {
+   "name": "Putrid Moldyman",
+   "bgs": [
+    [
+     28,
+     0
+    ],
+    [
+     27,
+     0
+    ],
+    [
+     26,
+     0
+    ]
+   ]
+  },
+  "ramblin-evil-mushroom": {
+   "name": "Ramblin' Evil Mushroom",
+   "bgs": [
+    [
+     9,
+     0
+    ],
+    [
+     12,
+     0
+    ],
+    [
+     10,
+     0
+    ],
+    [
+     212,
+     213
+    ]
+   ]
+  },
+  "ranboob": {
+   "name": "Ranboob",
+   "bgs": [
+    [
+     9,
+     0
+    ],
+    [
+     21,
+     0
+    ],
+    [
+     134,
+     0
+    ],
+    [
+     135,
+     0
+    ],
+    [
+     133,
+     0
+    ],
+    [
+     132,
+     0
+    ]
+   ]
+  },
+  "red-antoid": {
+   "name": "Red Antoid",
+   "bgs": [
+    [
+     317,
+     0
+    ],
+    [
+     32,
+     0
+    ],
+    [
+     31,
+     0
+    ]
+   ]
+  },
+  "robo-pump": {
+   "name": "Robo-pump",
+   "bgs": [
+    [
+     157,
+     0
+    ],
+    [
+     288,
+     0
+    ],
+    [
+     45,
+     258
+    ]
+   ]
+  },
+  "rowdy-mouse": {
+   "name": "Rowdy Mouse",
+   "bgs": [
+    [
+     72,
+     0
+    ],
+    [
+     10,
+     0
+    ],
+    [
+     80,
+     0
+    ],
+    [
+     81,
+     0
+    ],
+    [
+     79,
+     0
+    ],
+    [
+     217,
+     216
+    ]
+   ]
+  },
+  "runaway-dog": {
+   "name": "Runaway Dog",
+   "bgs": [
+    [
+     260,
+     0
+    ],
+    [
+     124,
+     0
+    ],
+    [
+     129,
+     0
+    ],
+    [
+     1,
+     0
+    ]
+   ]
+  },
+  "s-nightmare": {
+   "name": "|'s Nightmare",
+   "bgs": [
+    [
+     298,
+     0
+    ]
+   ]
+  },
+  "scalding-coffee-cup": {
+   "name": "Scalding Coffee Cup",
+   "bgs": [
+    [
+     87,
+     0
+    ],
+    [
+     84,
+     0
+    ],
+    [
+     159,
+     0
+    ]
+   ]
+  },
+  "sentry-robot": {
+   "name": "Sentry Robot",
+   "bgs": [
+    [
+     284,
+     0
+    ]
+   ]
+  },
+  "shattered-man": {
+   "name": "Shattered Man",
+   "bgs": [
+    [
+     195,
+     0
+    ]
+   ]
+  },
+  "shrooom": {
+   "name": "Shrooom!",
+   "bgs": [
+    [
+     168,
+     167
+    ]
+   ]
+  },
+  "skate-punk": {
+   "name": "Skate Punk",
+   "bgs": [
+    [
+     5,
+     0
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     8,
+     0
+    ]
+   ]
+  },
+  "skelpion": {
+   "name": "Skelpion",
+   "bgs": [
+    [
+     259,
+     0
+    ],
+    [
+     318,
+     0
+    ]
+   ]
+  },
+  "slimy-little-pile": {
+   "name": "Slimy Little Pile",
+   "bgs": [
+    [
+     280,
+     0
+    ],
+    [
+     192,
+     191
+    ]
+   ]
+  },
+  "smelly-ghost": {
+   "name": "Smelly Ghost",
+   "bgs": [
+    [
+     27,
+     0
+    ],
+    [
+     26,
+     0
+    ],
+    [
+     28,
+     0
+    ]
+   ]
+  },
+  "smilin-sam": {
+   "name": "Smilin' Sam",
+   "bgs": [
+    [
+     15,
+     0
+    ],
+    [
+     25,
+     0
+    ]
+   ]
+  },
+  "smilin-sphere": {
+   "name": "Smilin' Sphere",
+   "bgs": [
+    [
+     35,
+     0
+    ],
+    [
+     318,
+     0
+    ],
+    [
+     319,
+     0
+    ],
+    [
+     36,
+     0
+    ]
+   ]
+  },
+  "soul-consuming-flame": {
+   "name": "Soul Consuming Flame",
+   "bgs": [
+    [
+     106,
+     0
+    ],
+    [
+     299,
+     0
+    ],
+    [
+     303,
+     0
+    ]
+   ]
+  },
+  "spinning-robo": {
+   "name": "Spinning Robo",
+   "bgs": [
+    [
+     22,
+     0
+    ]
+   ]
+  },
+  "spiteful-crow": {
+   "name": "Spiteful Crow",
+   "bgs": [
+    [
+     262,
+     0
+    ],
+    [
+     123,
+     0
+    ],
+    [
+     126,
+     0
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     307,
+     306
+    ]
+   ]
+  },
+  "squatter-demon": {
+   "name": "Squatter Demon",
+   "bgs": [
+    [
+     296,
+     0
+    ]
+   ]
+  },
+  "starman": {
+   "name": "Starman",
+   "bgs": [
+    [
+     283,
+     0
+    ],
+    [
+     151,
+     0
+    ],
+    [
+     271,
+     0
+    ],
+    [
+     324,
+     0
+    ],
+    [
+     243,
+     0
+    ],
+    [
+     148,
+     0
+    ],
+    [
+     286,
+     0
+    ]
+   ]
+  },
+  "starman-deluxe": {
+   "name": "Starman Deluxe",
+   "bgs": [
+    [
+     199,
+     0
+    ]
+   ]
+  },
+  "starman-junior": {
+   "name": "Starman Junior",
+   "bgs": [
+    [
+     219,
+     218
+    ]
+   ]
+  },
+  "starman-super": {
+   "name": "Starman Super",
+   "bgs": [
+    [
+     271,
+     0
+    ],
+    [
+     148,
+     0
+    ],
+    [
+     286,
+     0
+    ],
+    [
+     243,
+     0
+    ]
+   ]
+  },
+  "stinky-ghost": {
+   "name": "Stinky Ghost",
+   "bgs": [
+    [
+     142,
+     0
+    ],
+    [
+     143,
+     0
+    ]
+   ]
+  },
+  "strong-crocodile": {
+   "name": "Strong Crocodile",
+   "bgs": [
+    [
+     73,
+     0
+    ],
+    [
+     74,
+     0
+    ]
+   ]
+  },
+  "struttin-evil-mushroom": {
+   "name": "Struttin' Evil Mushroom",
+   "bgs": [
+    [
+     9,
+     0
+    ],
+    [
+     10,
+     0
+    ],
+    [
+     134,
+     0
+    ],
+    [
+     135,
+     0
+    ],
+    [
+     133,
+     0
+    ],
+    [
+     132,
+     0
+    ]
+   ]
+  },
+  "tangoo": {
+   "name": "Tangoo",
+   "bgs": [
+    [
+     146,
+     0
+    ],
+    [
+     304,
+     0
+    ],
+    [
+     305,
+     0
+    ]
+   ]
+  },
+  "territorial-oak": {
+   "name": "Territorial Oak",
+   "bgs": [
+    [
+     11,
+     0
+    ]
+   ]
+  },
+  "thirsty-coil-snake": {
+   "name": "Thirsty Coil Snake",
+   "bgs": [
+    [
+     139,
+     0
+    ],
+    [
+     138,
+     0
+    ],
+    [
+     136,
+     0
+    ],
+    [
+     137,
+     0
+    ]
+   ]
+  },
+  "thunder-and-storm": {
+   "name": "Thunder and Storm",
+   "bgs": [
+    [
+     176,
+     175
+    ]
+   ]
+  },
+  "thunder-mite": {
+   "name": "Thunder Mite",
+   "bgs": [
+    [
+     51,
+     0
+    ],
+    [
+     304,
+     0
+    ]
+   ]
+  },
+  "titanic-ant": {
+   "name": "Titanic Ant",
+   "bgs": [
+    [
+     170,
+     169
+    ]
+   ]
+  },
+  "tough-guy": {
+   "name": "Tough Guy",
+   "bgs": [
+    [
+     46,
+     0
+    ],
+    [
+     49,
+     0
+    ]
+   ]
+  },
+  "tough-mobile-sprout": {
+   "name": "Tough Mobile Sprout",
+   "bgs": [
+    [
+     21,
+     0
+    ],
+    [
+     9,
+     0
+    ],
+    [
+     134,
+     0
+    ],
+    [
+     135,
+     0
+    ],
+    [
+     133,
+     0
+    ],
+    [
+     174,
+     173
+    ]
+   ]
+  },
+  "trick-or-trick-kid": {
+   "name": "Trick or Trick Kid",
+   "bgs": [
+    [
+     3,
+     0
+    ]
+   ]
+  },
+  "trillionage-sprout": {
+   "name": "Trillionage Sprout",
+   "bgs": [
+    [
+     174,
+     173
+    ]
+   ]
+  },
+  "ultimate-octobot": {
+   "name": "Ultimate Octobot",
+   "bgs": [
+    [
+     111,
+     0
+    ],
+    [
+     209,
+     0
+    ]
+   ]
+  },
+  "unassuming-local-guy": {
+   "name": "Unassuming Local Guy",
+   "bgs": [
+    [
+     269,
+     270
+    ],
+    [
+     307,
+     306
+    ]
+   ]
+  },
+  "uncontrollable-sphere": {
+   "name": "Uncontrollable Sphere",
+   "bgs": [
+    [
+     100,
+     0
+    ],
+    [
+     309,
+     0
+    ],
+    [
+     311,
+     0
+    ],
+    [
+     102,
+     0
+    ],
+    [
+     103,
+     0
+    ]
+   ]
+  },
+  "urban-zombie": {
+   "name": "Urban Zombie",
+   "bgs": [
+    [
+     27,
+     0
+    ],
+    [
+     26,
+     0
+    ],
+    [
+     153,
+     0
+    ],
+    [
+     152,
+     0
+    ]
+   ]
+  },
+  "violent-roach": {
+   "name": "Violent Roach",
+   "bgs": [
+    [
+     34,
+     0
+    ],
+    [
+     186,
+     185
+    ]
+   ]
+  },
+  "wetnosaur": {
+   "name": "Wetnosaur",
+   "bgs": [
+    [
+     64,
+     0
+    ]
+   ]
+  },
+  "whirling-robo": {
+   "name": "Whirling Robo",
+   "bgs": [
+    [
+     125,
+     0
+    ],
+    [
+     315,
+     0
+    ],
+    [
+     130,
+     0
+    ]
+   ]
+  },
+  "wild-n-wooly-shambler": {
+   "name": "Wild 'n Wooly Shambler",
+   "bgs": [
+    [
+     111,
+     0
+    ],
+    [
+     297,
+     0
+    ]
+   ]
+  },
+  "wooly-shambler": {
+   "name": "Wooly Shambler",
+   "bgs": [
+    [
+     313,
+     0
+    ],
+    [
+     125,
+     0
+    ],
+    [
+     315,
+     0
+    ],
+    [
+     130,
+     0
+    ]
+   ]
+  },
+  "worthless-protoplasm": {
+   "name": "Worthless Protoplasm",
+   "bgs": [
+    [
+     159,
+     0
+    ],
+    [
+     156,
+     0
+    ],
+    [
+     215,
+     214
+    ]
+   ]
+  },
+  "yes-man-junior": {
+   "name": "Yes Man Junior",
+   "bgs": [
+    [
+     5,
+     0
+    ],
+    [
+     7,
+     0
+    ],
+    [
+     8,
+     0
+    ],
+    [
+     6,
+     0
+    ]
+   ]
+  },
+  "zap-eel": {
+   "name": "Zap Eel",
+   "bgs": [
+    [
+     60,
+     0
+    ],
+    [
+     62,
+     0
+    ]
+   ]
+  },
+  "zombie-dog": {
+   "name": "Zombie Dog",
+   "bgs": [
+    [
+     29,
+     0
+    ],
+    [
+     27,
+     0
+    ],
+    [
+     153,
+     0
+    ],
+    [
+     154,
+     0
+    ]
+   ]
+  },
+  "zombie-possessor": {
+   "name": "Zombie Possessor",
+   "bgs": [
+    [
+     26,
+     0
+    ],
+    [
+     152,
+     0
+    ],
+    [
+     89,
+     0
+    ]
+   ]
+  }
+ }
+}
