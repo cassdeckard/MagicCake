@@ -23,6 +23,36 @@ Runs headless in Node: frames are rendered in memory and piped to ffmpeg. No npm
 | --aspect 0/16/48/64 | 0 | web demo's letterbox setting |
 | --mode fill/fit/stretch | fill | fill = crop to cover 16:9, fit = black side bars, stretch = distort |
 | --crf N | 18 | x264 quality (lower = better/bigger) |
+| --crt none/royale | none | CRT TV look; see [CRT look](#crt-look---crt-royale) |
+| --crt-mask aperture/slot/shadow | aperture | CRT phosphor mask |
+| --crt-curvature 0-1 | 0 | CRT screen curvature (0 = flat) |
+| --crt-bloom 0-2 | 0.25 | CRT glow around bright areas |
+| --crt-scanline 0-1 | 1 | CRT scanline strength |
+| --crt-triad 2-12 | 3 | CRT phosphor triad width in output px |
+| --crt-threads N | all cores | CRT worker threads |
+| --chain "spec@t / …" | – | switch backgrounds at times; see [Chaining](#chaining-backgrounds-switch-at-given-times) |
+| --chain-file FILE | – | same, from a file of `<start> <spec>` lines |
+| -h, --help | – | show usage |
+
+Other commands:
+
+| command | meaning |
+|---|---|
+| `magic-cake <enemy>[-N] <out.mp4> [options]` | use an enemy's background instead of layer numbers; see [Backgrounds by enemy name](#backgrounds-by-enemy-name) |
+| `magic-cake --list-enemies [filter] [--plain]` | list enemy slugs and their layer pairs (`--plain` = slugs only) |
+| `magic-cake --completion bash/zsh` | print a shell completion script; see [Shell completion](#shell-completion) |
+| `magic-cake burn <script.ass> [out.mp4] [options]` | burn subtitles into a YouTube-ready MP4; see [burn](#burn-subtitles-for-youtube-magic-cake-burn) |
+
+`burn` options:
+
+| option | default | meaning |
+|---|---|---|
+| --video FILE | the .ass's `Video File:` | background video |
+| --audio FILE | the .ass's `Audio File:` (or the video's audio) | audio |
+| --crf N | 18 | x264 quality (lower = better/bigger) |
+| --preset NAME | slow | x264 preset |
+| --fontsdir DIR | ~/Library/Fonts if it exists | fonts folder for libass |
+| --ffmpeg PATH | `$MAGIC_CAKE_FFMPEG`, then ffmpeg-full, then `ffmpeg` on PATH | ffmpeg build with libass |
 
 Layers are 0–326 (0 = none). The web demo's default is 270 / 269.
 Pixels are scaled with nearest-neighbor, so they stay crisp.

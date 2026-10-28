@@ -77,11 +77,13 @@ if (argv0[0] === '--list-enemies') {
 }
 if (argv0[0] === '--completion') {
   const sh = argv0[1]; if (!['bash', 'zsh'].includes(sh)) die('Usage: magic-cake --completion <bash|zsh>')
-  const flags = 'burn --video --fontsdir --preset --ffmpeg --chain --chain-file --duration --audio --mux --size --fps --frameskip --aspect --mode --crf --crt --crt-mask --crt-curvature --crt-bloom --crt-scanline --crt-triad --crt-threads --list-enemies --completion --help'
+  const flags = 'burn --video --fontsdir --preset --ffmpeg --chain --chain-file --duration --audio --mux --size --fps --frameskip --aspect --mode --crf --crt --crt-mask --crt-curvature --crt-bloom --crt-scanline --crt-triad --crt-threads --list-enemies --plain --completion --help'
   const body = `_magic_cake() {
   local cur prev; cur="\${COMP_WORDS[COMP_CWORD]}"; prev="\${COMP_WORDS[COMP_CWORD-1]}"
   case "$prev" in
-    --audio|--chain-file) COMPREPLY=($(compgen -f -- "$cur")); return;;
+    --audio|--chain-file|--video|--ffmpeg) COMPREPLY=($(compgen -f -- "$cur")); return;;
+    --fontsdir) COMPREPLY=($(compgen -d -- "$cur")); return;;
+    --preset) COMPREPLY=($(compgen -W "ultrafast superfast veryfast faster fast medium slow slower veryslow placebo" -- "$cur")); return;;
     --mode) COMPREPLY=($(compgen -W "fill fit stretch" -- "$cur")); return;;
     --crt) COMPREPLY=($(compgen -W "${Object.keys(PRESETS).join(' ')}" -- "$cur")); return;;
     --crt-mask) COMPREPLY=($(compgen -W "${MASKS.join(' ')}" -- "$cur")); return;;
@@ -95,7 +97,7 @@ if (argv0[0] === '--completion') {
   if [[ "$cur" == -* ]]; then COMPREPLY=($(compgen -W "${flags}" -- "$cur")); return; fi
   local i n=0
   for ((i=1; i<COMP_CWORD; i++)); do
-    case "\${COMP_WORDS[i]}" in --mux) ;; --*) ((i++));; *) ((n++));; esac
+    case "\${COMP_WORDS[i]}" in --mux|--plain) ;; --*) ((i++));; *) ((n++));; esac
   done
   if ((n == 0)); then COMPREPLY=($(compgen -W "${allSlugs().map(x => x[0]).join(' ')}" -- "$cur"))
   else COMPREPLY=($(compgen -f -- "$cur")); fi
