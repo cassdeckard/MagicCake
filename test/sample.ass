@@ -1,0 +1,25 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 640
+PlayResY: 360
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Intro,Arial,20,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,2,0,2,10,10,10,1
+Style: Verse,Arial,20,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,2,0,2,10,10,10,1
+Style: Chorus,Arial,20,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,2,0,2,10,10,10,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Comment: 0,0:00:00.00,0:00:00.10,Verse,,0,0,0,template line,{\kf$kdur}
+Comment: 0,0:00:00.00,0:00:00.10,Verse,,0,0,0,code once,blk = 0
+Comment: 0,0:00:00.50,0:00:01.50,Intro,,0,0,0,karaoke,{\k50}oh {\k50}oh
+Dialogue: 0,0:00:00.50,0:00:01.50,Intro,,0,0,0,fx,{\kf50}oh oh
+Dialogue: 0,0:00:01.50,0:00:02.20,Intro,,0,0,0,,hey
+Comment: 0,0:00:02.20,0:00:03.00,Verse,,0,0,0,karaoke,{\k40}first {\k40}verse
+Comment: 0,0:00:03.00,0:00:03.90,Verse,,0,0,0,karaoke,{\k45}still {\k45}verse
+Dialogue: 0,0:00:03.00,0:00:03.90,Verse,,0,0,0,,{\k45}still {\k45}verse
+Comment: 0,0:00:04.10,0:00:05.00,Chorus,,0,0,0,karaoke,chorus one
+Comment: 0,0:00:05.00,0:00:05.40,Chorus,,0,0,0,karaoke,chorus two
+Comment: 0,0:00:05.40,0:00:05.80,Verse,,0,0,0,karaoke,verse again
+Comment: 0,0:00:00.00,0:00:00.00,Verse,,0,0,0,just a note,not a lyric

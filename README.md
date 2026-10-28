@@ -33,6 +33,44 @@ Pixels are scaled with nearest-neighbor, so they stay crisp.
     magic-cake 50 300 preview.mp4 --audio song.flac --mux
     magic-cake 223 0 slow.mp4 --mode fit --fps 60
 
+## Chaining backgrounds (switch at given times)
+
+One continuous video, hard cut at each start time (rounded to the nearest frame at `--fps`). Each segment's animation restarts from 0, like a new battle.
+
+```
+magic-cake out.mp4 --chain "black-antoid@0 / 270,269@12.48 / 50,300@0:45.10" --audio song.flac
+```
+
+Segments are separated by `/`; each is `<spec>@<start>`, where spec is an enemy slug or `l1,l2` and start is seconds or `[h:]mm:ss.cc`. The first must start at 0; the last runs to `--duration` or the `--audio` length.
+
+Or put them in a file, one `<start> <spec>` per line (`#` starts a comment):
+
+```
+# segs.txt
+0        black-antoid
+12.48    270,269
+0:45.10  50 300
+```
+
+`magic-cake out.mp4 --chain-file segs.txt --duration 180`
+
+## Aegisub macro: backgrounds per section
+
+`automation/magic-cake.lua` turns your lyric Styles into sections (e.g. Intro / Verse / Chorus) and renders a background video that switches at each section.
+
+**Install:** copy `automation/magic-cake.lua` to `~/Library/Application Support/Aegisub/automation/autoload/`, then restart Aegisub (or Automation > Automation… > Rescan Autoload Dir). magic-cake must be installed (`npm link`) along with node and ffmpeg; the macro adds `/opt/homebrew/bin` and `/usr/local/bin` to PATH, since apps launched from the Dock don't see your shell PATH.
+
+**Use:** Automation > *Magic Cake: Generate section backgrounds*.
+- Lyric lines are normal Dialogue lines plus karaoke source Comments (Effect `karaoke`). Templater output (`fx`), `template`/`code` lines and other comments are ignored; duplicates are counted once.
+- Lines are sorted by start time, and back-to-back lines with the same Style form one section. A section starts at its first line (the first section starts at 0:00) and lasts until the next section starts. The last one runs to the end of the audio file, or 3 seconds past the last line if there's no audio.
+- The dialog asks for a background per Style (enemy slug or `l1,l2`), the output path (default `<script>-bg.mp4` next to the .ass), size (default PlayResX×PlayResY), fps, audio (default: the loaded audio), extra options (e.g. `--mode fit`), and the magic-cake command (use a full path like `/opt/homebrew/bin/magic-cake` if it isn't found).
+- Your choices are saved in the script as Comment lines with Effect `magic-cake`, so next time the dialog is pre-filled. **Save only** stores them without rendering.
+- The log window shows the section list, the command and magic-cake's output. Automation scripts can't load video, so open the result with **Video > Open Video**.
+
+## Tests
+
+`test/chain_test.sh` checks the chain cuts land on the exact frames. `cd test && lua run_tests.lua && lua run_macro_mock.lua` tests the macro's section grouping against `test/sample.ass`, then runs the whole macro against a stubbed Aegisub API.
+
 ## Credits
 Rendering code in vendor/ is from gjtorikian/Earthbound-Battle-Backgrounds-JS
 (license: vendor/LICENSE.txt), lightly adapted to run as plain Node ES modules

@@ -12,6 +12,7 @@ import { renderLayers, SNES_WIDTH, SNES_HEIGHT } from './vendor/engine.js'
 const HERE = path.dirname(fileURLToPath(import.meta.url))
 const USAGE = `Usage: magic-cake <layer1> <layer2> <out.mp4> [options]
        magic-cake <enemy>[-N] <out.mp4> [options]
+       magic-cake <out.mp4> --chain "<spec>@<t> / ..." | --chain-file <file> [options]
        magic-cake --list-enemies [filter] [--plain]
        magic-cake --completion <bash|zsh>
   layer1, layer2      0-326 (0 = none). Web demo default: 270 269
@@ -25,7 +26,12 @@ Options:
   --frameskip <1-10>  animation speed, like the web demo (default 1)
   --aspect <0|16|48|64>  web demo letterbox setting (default 0 = full)
   --mode <fill|fit|stretch>  fill = crop to cover (default), fit = black bars
-  --crf <n>           x264 quality (default 18)`
+  --crf <n>           x264 quality (default 18)
+  --chain "<spec>@<t> / <spec>@<t> ..."   switch backgrounds at times (hard cut,
+                      animation restarts each segment). spec = enemy slug or l1,l2;
+                      t = seconds or [h:]mm:ss.cc. First segment must start at 0.
+                      Usage: magic-cake out.mp4 --chain "black-antoid@0 / 270,269@12.48"
+  --chain-file <file> same, one "<start> <spec>" per line (# comments ok)`
 
 function die (m) { console.error(m); process.exit(1) }
 const ENEMIES = JSON.parse(readFileSync(path.join(HERE, 'data/enemies.json'), 'utf8')).enemies
@@ -60,15 +66,17 @@ if (argv0[0] === '--list-enemies') {
 }
 if (argv0[0] === '--completion') {
   const sh = argv0[1]; if (!['bash', 'zsh'].includes(sh)) die('Usage: magic-cake --completion <bash|zsh>')
-  const flags = '--duration --audio --mux --size --fps --frameskip --aspect --mode --crf --list-enemies --completion --help'
+  const flags = '--chain --chain-file --duration --audio --mux --size --fps --frameskip --aspect --mode --crf --list-enemies --completion --help'
   const body = `_magic_cake() {
   local cur prev; cur="\${COMP_WORDS[COMP_CWORD]}"; prev="\${COMP_WORDS[COMP_CWORD-1]}"
   case "$prev" in
-    --audio) COMPREPLY=($(compgen -f -- "$cur")); return;;
+    --audio|--chain-file) COMPREPLY=($(compgen -f -- "$cur")); return;;
     --mode) COMPREPLY=($(compgen -W "fill fit stretch" -- "$cur")); return;;
     --aspect) COMPREPLY=($(compgen -W "0 16 48 64" -- "$cur")); return;;
     --completion) COMPREPLY=($(compgen -W "bash zsh" -- "$cur")); return;;
     --duration|--size|--fps|--frameskip|--crf|--list-enemies) return;;
+    --chain) local w="\${cur##*/}"; w="\${w# }"; local pre="\${cur%"$w"}"
+      COMPREPLY=($(compgen -P "$pre" -W "${allSlugs().map(x => x[0]).join(' ')}" -- "$w")); compopt -o nospace 2>/dev/null; return;;
   esac
   if [[ "$cur" == -* ]]; then COMPREPLY=($(compgen -W "${flags}" -- "$cur")); return; fi
   local i n=0
@@ -90,10 +98,42 @@ for (let i = 0; i < args.length; i++) {
   if (a === '--mux') opt.mux = true
   else if (a.startsWith('--')) { if (i + 1 >= args.length) die(`Missing value for ${a}`); opt[a.slice(2)] = args[++i] } else pos.push(a)
 }
-if (pos.length === 2) { const b = resolveEnemy(pos[0]); pos.splice(0, 1, String(b[0]), String(b[1])) }
-if (pos.length !== 3) die(USAGE)
-const layer1 = Number(pos[0]); const layer2 = Number(pos[1]); const out = pos[2]
-for (const l of [layer1, layer2]) if (!Number.isInteger(l) || l < 0 || l > 326) die('Layers must be integers 0-326')
+function parseTime (t) {
+  const p = String(t).trim().split(':').map(Number)
+  if (!p.length || p.some(x => !Number.isFinite(x))) die(`Bad time "${t}"`)
+  return p.reduce((a, x) => a * 60 + x, 0)
+}
+function parseSpec (sp) {
+  sp = sp.trim()
+  let m = sp.match(/^(\d+)\s*[, ]\s*(\d+)$/)
+  const b = m ? [Number(m[1]), Number(m[2])] : resolveEnemy(sp)
+  for (const l of b) if (!Number.isInteger(l) || l < 0 || l > 326) die(`Layers must be integers 0-326 (in "${sp}")`)
+  return b
+}
+let segs
+if (opt.chain || opt['chain-file']) {
+  const raw = []
+  if (opt.chain) for (const part of opt.chain.split('/')) {
+    if (!part.trim()) continue
+    const i = part.lastIndexOf('@'); if (i < 0) die(`Chain segment "${part.trim()}" needs @<start time>`)
+    raw.push([part.slice(i + 1), part.slice(0, i)])
+  }
+  if (opt['chain-file']) for (const ln of readFileSync(opt['chain-file'], 'utf8').split(/\r?\n/)) {
+    const l = ln.replace(/#.*/, '').trim(); if (!l) continue
+    const m = l.match(/^(\S+)\s+(.+)$/); if (!m) die(`Bad chain-file line "${l}" (want "<start> <spec>")`)
+    raw.push([m[1], m[2]])
+  }
+  if (pos.length !== 1) die('With --chain/--chain-file give just the output file')
+  segs = raw.map(([t, sp]) => ({ t: parseTime(t), b: parseSpec(sp), spec: sp.trim() })).sort((a, b) => a.t - b.t)
+  if (!segs.length) die('Empty chain')
+  if (segs[0].t !== 0) die('First chain segment must start at 0')
+} else {
+  if (pos.length === 2) { const b = resolveEnemy(pos[0]); pos.splice(0, 1, String(b[0]), String(b[1])) }
+  if (pos.length !== 3) die(USAGE)
+  segs = [{ t: 0, b: parseSpec(pos[0] + ',' + pos[1]), spec: pos[0] + ',' + pos[1] }]
+  pos.splice(0, 2)
+}
+const out = pos[0]
 const [W, H] = (opt.size || '1280x720').split('x').map(Number)
 if (!W || !H) die('Bad --size, use WxH')
 const fps = Number(opt.fps || 30)
@@ -111,11 +151,15 @@ if (opt.mux && !opt.audio) die('--mux needs --audio')
 const totalFrames = Math.ceil(duration * fps)
 
 const rom = new Rom(new Uint8Array(readFileSync(path.join(HERE, 'vendor/truncated_backgrounds.dat'))))
-const layers = [new BackgroundLayer(layer1, rom), new BackgroundLayer(layer2, rom)]
-// same alpha logic as the web demo (index.js + engine.animate)
-let alpha = layer2 === 0 ? [1, 1] : [0.5, 0.5]
-if (layer1 && !layer2) alpha = [1, 0]
-if (!layer1 && layer2) alpha = [0, 1]
+function makeSeg (l1, l2) {
+  // same alpha logic as the web demo (index.js + engine.animate)
+  let alpha = l2 === 0 ? [1, 1] : [0.5, 0.5]
+  if (l1 && !l2) alpha = [1, 0]
+  if (!l1 && l2) alpha = [0, 1]
+  return { layers: [new BackgroundLayer(l1, rom), new BackgroundLayer(l2, rom)], alpha }
+}
+for (const sg of segs) { sg.frame = Math.round(sg.t * fps); Object.assign(sg, makeSeg(sg.b[0], sg.b[1])) }
+if (segs.length > 1 && segs[segs.length - 1].frame >= totalFrames) die('A chain segment starts after the video ends (check --duration/--audio)')
 
 let vf
 if (mode === 'fit') vf = `scale=${W}:${H}:flags=neighbor:force_original_aspect_ratio=decrease,pad=${W}:${H}:(ow-iw)/2:(oh-ih)/2`
@@ -136,10 +180,11 @@ const done = new Promise(r => proc.on('close', c => { ffExit = c; r(c) }))
 
 const dst = new Uint8ClampedArray(SNES_WIDTH * SNES_HEIGHT * 4)
 const t0 = Date.now()
-let tick = 0
+let tick = 0; let si = 0
 for (let f = 0; f < totalFrames; f++) {
   if (ffExit !== null) break
-  const bmp = renderLayers(layers, dst, aspect, tick, alpha)
+  while (si + 1 < segs.length && f >= segs[si + 1].frame) { si++; tick = 0 }
+  const bmp = renderLayers(segs[si].layers, dst, aspect, tick, segs[si].alpha)
   tick += frameskip
   const buf = Buffer.from(bmp.buffer ? new Uint8Array(bmp.buffer, bmp.byteOffset, bmp.byteLength) : Uint8Array.from(bmp))
   if (!proc.stdin.write(Buffer.from(buf))) await new Promise(r => proc.stdin.once('drain', r))
@@ -150,4 +195,4 @@ const code = await done
 const s = (Date.now() - t0) / 1000
 process.stderr.write(`\rframe ${totalFrames}/${totalFrames}\n`)
 if (code !== 0) die(`ffmpeg failed (exit ${code})`)
-console.log(`Wrote ${out}: ${totalFrames} frames, ${W}x${H}@${fps}, layers ${layer1}/${layer2}, ${s.toFixed(1)}s (${(totalFrames / s).toFixed(0)} fps)`)
+console.log(`Wrote ${out}: ${totalFrames} frames, ${W}x${H}@${fps}, ${segs.map(g => `${g.b[0]}/${g.b[1]}@${g.t}`).join(' | ')}, ${s.toFixed(1)}s (${(totalFrames / s).toFixed(0)} fps)`)
