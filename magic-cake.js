@@ -14,6 +14,7 @@ const HERE = path.dirname(fileURLToPath(import.meta.url))
 const USAGE = `Usage: magic-cake <layer1> <layer2> <out.mp4> [options]
        magic-cake <enemy>[-N] <out.mp4> [options]
        magic-cake <out.mp4> --chain "<spec>@<t> / ..." | --chain-file <file> [options]
+       magic-cake burn <script.ass> [out.mp4] [--video v] [--audio a] [--crf 18]  (see burn --help)
        magic-cake --list-enemies [filter] [--plain]
        magic-cake --completion <bash|zsh>
   layer1, layer2      0-326 (0 = none). Web demo default: 270 269
@@ -68,6 +69,7 @@ function resolveEnemy (q) {
   die(`Unknown enemy "${q}". Did you mean: ${sugg.join(', ')}?\nSee magic-cake --list-enemies`)
 }
 const argv0 = process.argv.slice(2)
+if (argv0[0] === 'burn') { const { burn } = await import('./lib/burn.js'); await burn(argv0.slice(1)); process.exit(0) }
 if (argv0[0] === '--list-enemies') {
   const plain = argv0.includes('--plain'); const f = argv0.slice(1).find(a => a !== '--plain')
   for (const [s, b] of allSlugs()) if (!f || s.includes(f.toLowerCase())) console.log(plain ? s : `${s.padEnd(32)} ${b[0]} ${b[1]}`)
@@ -75,7 +77,7 @@ if (argv0[0] === '--list-enemies') {
 }
 if (argv0[0] === '--completion') {
   const sh = argv0[1]; if (!['bash', 'zsh'].includes(sh)) die('Usage: magic-cake --completion <bash|zsh>')
-  const flags = '--chain --chain-file --duration --audio --mux --size --fps --frameskip --aspect --mode --crf --crt --crt-mask --crt-curvature --crt-bloom --crt-scanline --crt-triad --crt-threads --list-enemies --completion --help'
+  const flags = 'burn --video --fontsdir --preset --ffmpeg --chain --chain-file --duration --audio --mux --size --fps --frameskip --aspect --mode --crf --crt --crt-mask --crt-curvature --crt-bloom --crt-scanline --crt-triad --crt-threads --list-enemies --completion --help'
   const body = `_magic_cake() {
   local cur prev; cur="\${COMP_WORDS[COMP_CWORD]}"; prev="\${COMP_WORDS[COMP_CWORD-1]}"
   case "$prev" in

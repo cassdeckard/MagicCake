@@ -67,9 +67,35 @@ Or put them in a file, one `<start> <spec>` per line (`#` starts a comment):
 - Your choices are saved in the script as Comment lines with Effect `magic-cake`, so next time the dialog is pre-filled. **Save only** stores them without rendering.
 - The log window shows the section list, the command and magic-cake's output. Automation scripts can't load video, so open the result with **Video > Open Video**.
 
+## Burn subtitles for YouTube (`magic-cake burn`)
+
+```
+magic-cake burn nakamarra-karaoke.ass
+magic-cake burn song.ass out.mp4 --video bg.mp4 --audio song.mp3 --crf 16 --preset slow
+```
+
+Bakes the .ass into the video and adds the audio, making an MP4 ready to upload to YouTube.
+- **Video and audio** default to the `Video File:` / `Audio File:` paths that Aegisub saves in the .ass (they're relative to the .ass's folder). If the audio is "from video", the video's own audio is used. Dummy video gives an error, so pass `--video` instead.
+- **Output** defaults to `<script>-youtube.mp4` next to the .ass. It's H.264 High, yuv420p, tagged BT.709, AAC 320k at 48 kHz, with `+faststart`. The length matches the shorter of the video and audio, with a warning if they differ by more than 1 s.
+- **Fonts:** `~/Library/Fonts` is passed to libass if it exists, so your installed TTFs (Year Is 199X, Fourside, …) are used. Override it with `--fontsdir DIR`.
+- Karaoke source Comments are ignored, as in Aegisub. If the file has template lines but no generated `fx` lines, you'll get a warning to run *Apply karaoke template* and save first.
+- Shows its progress as a percentage.
+
+**ffmpeg needs libass.** Homebrew's plain `ffmpeg` formula doesn't include it (it has no `ass`/`subtitles` filter). Install the full build:
+
+```
+brew install ffmpeg-full
+```
+
+It's keg-only, so it installs alongside the regular ffmpeg without replacing it, and magic-cake finds it automatically at `/opt/homebrew/opt/ffmpeg-full/bin/ffmpeg`. To use some other ffmpeg, pass `--ffmpeg /path/to/ffmpeg` or set `MAGIC_CAKE_FFMPEG`.
+
+### Aegisub macro: Export YouTube video
+
+Copy `automation/magic-cake-export.lua` to the same `autoload/` folder, then run Automation > *Magic Cake: Export YouTube video*. It runs `magic-cake burn` on the **saved** .ass on disk, so save first. The dialog has fields for the output (default `<name>-youtube.mp4`), video and audio (prefilled from the loaded files; leave them blank to use the .ass's own), CRF, extra options (e.g. `--preset medium --ffmpeg /path`), and the magic-cake command. Your choices are saved as `opt:export-*` Comment lines with Effect `magic-cake`. Its output shows up in the log window.
+
 ## Tests
 
-`test/chain_test.sh` checks the chain cuts land on the exact frames. `cd test && lua run_tests.lua && lua run_macro_mock.lua` tests the macro's section grouping against `test/sample.ass`, then runs the whole macro against a stubbed Aegisub API.
+`test/chain_test.sh` checks the chain cuts land on the exact frames. `cd test && lua run_tests.lua && lua run_macro_mock.lua` tests the macro's section grouping against `test/sample.ass`, then runs the whole macro against a stubbed Aegisub API. `lua run_export_mock.lua <dir>` runs the export macro on a `<dir>/song.ass` (with its video, audio, and `fonts/`).
 
 ## Credits
 Rendering code in vendor/ is from gjtorikian/Earthbound-Battle-Backgrounds-JS
