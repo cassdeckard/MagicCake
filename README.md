@@ -1,4 +1,4 @@
-# ebbg — EarthBound battle backgrounds → video
+# MagicCake — EarthBound battle backgrounds → video
 
 Renders an EarthBound battle background (same layer numbers as
 https://gjtorikian.online/Earthbound-Battle-Backgrounds-JS/) to an H.264 MP4 you can open
@@ -7,10 +7,10 @@ Runs headless in Node: frames are rendered in memory and piped to ffmpeg. No npm
 
 ## Setup (macOS)
     brew install node ffmpeg
-    unzip ebbg.zip && cd ebbg
+    git clone https://github.com/cassdeckard/MagicCake && cd MagicCake && npm link   # installs the `magic-cake` command
 
 ## Usage
-    node ebbg.js <layer1> <layer2> <out.mp4> [options]
+    magic-cake <layer1> <layer2> <out.mp4> [options]
 
 | option | default | meaning |
 |---|---|---|
@@ -28,10 +28,10 @@ Layers are 0–326 (0 = none). The web demo's default is 270 / 269.
 Pixels are scaled with nearest-neighbor, so they stay crisp.
 
 ## Examples
-    node ebbg.js 270 269 test.mp4 --duration 5
-    node ebbg.js 50 300 nakamarra-bg.mp4 --audio "nakamarra.flac"
-    node ebbg.js 50 300 preview.mp4 --audio song.flac --mux
-    node ebbg.js 223 0 slow.mp4 --mode fit --fps 60
+    magic-cake 270 269 test.mp4 --duration 5
+    magic-cake 50 300 nakamarra-bg.mp4 --audio "nakamarra.flac"
+    magic-cake 50 300 preview.mp4 --audio song.flac --mux
+    magic-cake 223 0 slow.mp4 --mode fit --fps 60
 
 ## Credits
 Rendering code in vendor/ is from gjtorikian/Earthbound-Battle-Backgrounds-JS

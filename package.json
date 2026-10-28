@@ -1,9 +1,9 @@
 {
-  "name": "ebbg",
+  "name": "magic-cake",
   "version": "1.0.0",
   "description": "Render EarthBound battle backgrounds to video (Node + ffmpeg)",
   "type": "module",
-  "bin": { "ebbg": "./ebbg.js" },
+  "bin": { "magic-cake": "./magic-cake.js" },
   "engines": { "node": ">=18" },
   "license": "MIT"
 }

@@ -10,7 +10,7 @@ import BackgroundLayer from './vendor/rom/background_layer.js'
 import { renderLayers, SNES_WIDTH, SNES_HEIGHT } from './vendor/engine.js'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
-const USAGE = `Usage: node ebbg.js <layer1> <layer2> <out.mp4> [options]
+const USAGE = `Usage: magic-cake <layer1> <layer2> <out.mp4> [options]
   layer1, layer2      0-326 (0 = none). Web demo default: 270 269
 Options:
   --duration <sec>    length in seconds (default 60)
