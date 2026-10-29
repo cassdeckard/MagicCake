@@ -5,7 +5,7 @@
 script_name = "Magic Cake: Generate section backgrounds"
 script_description = "Render a battle-background video that changes background at each Style section"
 script_author = "Cass D"
-script_version = "1.0"
+script_version = "1.1"
 
 local M = {}
 local TAG = "magic-cake"   -- Effect of the Comment lines that store saved choices
@@ -20,7 +20,25 @@ function M.is_lyric(l)
   return true
 end
 
--- Returns sections {style=, start=ms, finish=ms} and the last lyric end (ms).
+-- Section group for a style: "-furigana" maps to its base style, and every
+-- "Title" / "Title-*" style (and "Credits" / "Credits-*") shares one group.
+function M.group(style)
+  local g = (style or ""):gsub("%-furigana$", "")
+  if g == "Title" or g:match("^Title%-") then return "Title" end
+  if g == "Credits" or g:match("^Credits%-") then return "Credits" end
+  return g
+end
+
+-- Saved pick for a group, falling back to an old per-style key (e.g. bg:Title-Song).
+function M.saved_bg(bg, grp)
+  if bg[grp] then return bg[grp] end
+  local keys = {}
+  for k in pairs(bg) do if M.group(k) == grp then keys[#keys + 1] = k end end
+  table.sort(keys)
+  return keys[1] and bg[keys[1]] or nil
+end
+
+-- Returns sections {style=<group>, start=ms, finish=ms} and the last lyric end (ms).
 function M.sections(lines, end_ms)
   local ly, seen = {}, {}
   for _, l in ipairs(lines) do
@@ -36,9 +54,10 @@ function M.sections(lines, end_ms)
   for _, l in ipairs(ly) do
     if l.end_time > last_end then last_end = l.end_time end
     local cur = secs[#secs]
-    if not cur or cur.style ~= l.style then
+    local g = M.group(l.style)
+    if not cur or cur.style ~= g then
       if cur then cur.finish = l.start_time end
-      secs[#secs + 1] = { style = l.style, start = (#secs == 0) and 0 or l.start_time }
+      secs[#secs + 1] = { style = g, start = (#secs == 0) and 0 or l.start_time }
     end
   end
   if #secs > 0 then secs[#secs].finish = end_ms or (last_end + 3000) end
@@ -107,7 +126,7 @@ function M.macro(subs)
   for i, st in ipairs(styles) do
     y = y + 1
     cfg[#cfg + 1] = { class = "label", x = 0, y = y, label = st }
-    cfg[#cfg + 1] = { class = "edit", x = 1, y = y, width = 3, name = "bg" .. i, value = bg[st] or "" }
+    cfg[#cfg + 1] = { class = "edit", x = 1, y = y, width = 3, name = "bg" .. i, value = M.saved_bg(bg, st) or "" }
   end
   local function row(label, nm, val) y = y + 1
     cfg[#cfg + 1] = { class = "label", x = 0, y = y, label = label }
@@ -135,7 +154,7 @@ function M.macro(subs)
     l.comment, l.effect, l.text, l.start_time, l.end_time, l.layer = true, TAG, text, 0, 0, 0
     subs.append(l)
   end
-  for st, sp in pairs(bg) do if specs[st] == nil then save("bg:" .. st .. "=" .. sp) end end -- keep unused styles' picks
+  for st, sp in pairs(bg) do if specs[st] == nil and specs[M.group(st)] == nil then save("bg:" .. st .. "=" .. sp) end end -- keep unused styles' picks
   for _, st in ipairs(styles) do if specs[st] ~= "" then save("bg:" .. st .. "=" .. specs[st]) end end
   for _, k in ipairs({ "out", "size", "fps", "audio", "extra", "cmd" }) do save("opt:" .. k .. "=" .. (r[k] or "")) end
   aegisub.set_undo_point("Magic Cake settings")
