@@ -5,7 +5,7 @@
 script_name = "Magic Cake: Generate section backgrounds"
 script_description = "Render a battle-background video that changes background at each Style section"
 script_author = "Cass D"
-script_version = "1.2"
+script_version = "1.3"
 
 local M = {}
 local TAG = "magic-cake"   -- Effect of the Comment lines that store saved choices
@@ -22,8 +22,10 @@ end
 
 -- Section group for a style: "-furigana" maps to its base style, and every
 -- "Title" / "Title-*" style (and "Credits" / "Credits-*") shares one group.
+-- Duet lane suffixes "-L" / "-R" map to the base section (Verse-L -> Verse).
 function M.group(style)
   local g = (style or ""):gsub("%-furigana$", "")
+  g = g:gsub("^(.+)%-[LR]$", "%1")
   if g == "Title" or g:match("^Title%-") then return "Title" end
   if g == "Credits" or g:match("^Credits%-") then return "Credits" end
   return g

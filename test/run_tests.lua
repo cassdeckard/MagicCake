@@ -37,3 +37,9 @@ assert(segstr(T, {}) == nil and segstr(T, {Title="", Verse=""}) == nil)
 local ct = M.chain_text(T, {Verse="v", Refrain="r"}); print(ct)
 assert(select(2, ct:gsub("\n", "")) == 5 and ct:find("0.000 v   # Title + Verse", 1, true))
 print("ALL LUA TESTS PASSED")
+-- v1.3 duet lanes
+for st, want in pairs({ ["Verse-L"]="Verse", ["Verse-R"]="Verse", ["Bridge-L"]="Bridge", ["Bridge-R-furigana"]="Bridge", ["Verse-L-furigana"]="Verse", ["Chorus"]="Chorus", ["-L"]="-L", ["Title-Song"]="Title" }) do
+  assert(M.group(st) == want, st .. " -> " .. tostring(M.group(st)))
+end
+assert(M.saved_bg({ Verse = "abstract-art" }, M.group("Verse-R")) == "abstract-art")
+print("DUET LANE GROUPING PASSED")
